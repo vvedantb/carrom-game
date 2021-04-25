@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{Gratzer2007}
+Figure 1.
+\newblock {\em \href{https://www.overleaf.com/learn/latex/hyperlinks}{Link}}.
+\newblock test, test.
+
+\bibitem{Gratzer2008}
+Figure 2.
+\newblock {\em \href{http://www.texample.net/tikz/resources/}{Tex Example
+  Site}}.
+\newblock test, test.
+
+\end{thebibliography}
