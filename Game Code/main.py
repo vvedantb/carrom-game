@@ -10,7 +10,7 @@ clock = pygame.time.Clock() # Creates a clock object that is used to track amoun
 pygame.init() # Initialises all imported Pygame modules 
 pygame.display.set_caption("Carrom Game") # Sets program caption 
 
-WIDTH, HEIGHT = 1280, 720
+WIDTH, HEIGHT = 1000, 1000
 
 BROWN = (164,116,73)
 BLACK = (0,0,0)
@@ -30,6 +30,7 @@ FPS = 60 # Sets the refresh rate, i.e. 60 times a second
 
 mouse_click = False # If a click has been made by the mouse
 
+screen.fill(BROWN)
 
 
 def drawText(text, font, color, surface, x, y): # Writes text onto the screen of the program
@@ -38,7 +39,7 @@ def drawText(text, font, color, surface, x, y): # Writes text onto the screen of
     textrect.topleft = (x,y)
     surface.blit(textobj, textrect)
 
-    
+
 def mainMenu():     
     while True:
         screen.fill(BROWN)
@@ -48,13 +49,13 @@ def mainMenu():
 
         mx, my = pygame.mouse.get_pos() # Retrieves the current position of where the mouse is
 
-        button_height = screen.get_height()/10
+        button_height = screen.get_height()/20
         button_width = screen.get_width()/10
 
-        game_button = pygame.Rect(50,100, button_width, button_height)
-        options_button = pygame.Rect(50,100, button_width, button_height)
-        settings_button = pygame.Rect(50,100, button_width, button_height)
-        quit_button = pygame.Rect(50,100, button_width, button_height)
+        game_button = pygame.Rect(button_width, button_height, 3*button_width, button_height)
+        options_button = pygame.Rect(button_width, 3*button_height, 3*button_width, button_height)
+        settings_button = pygame.Rect(button_width, 6*button_height, 3*button_width, button_height)
+        quit_button = pygame.Rect(button_width, 9*button_height, 2*button_width, button_height)
 
         if game_button.collidepoint((mx,my)): # Checks if mouse location overlaps button 1 location
             if mouse_click: # Checks if button has been clicked
@@ -77,10 +78,10 @@ def mainMenu():
         text_width = screen.get_width()/10
         text_height = screen.get_height()/6
 
-        drawText("Play Game", font, BLACK, screen, text_height, text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
-        drawText("Options", font, BLACK, screen, text_height, 2*text_width)
-        drawText("Settings", font, BLACK, screen, text_height, 3*text_width)
-        drawText("Quit", font, BLACK, screen, text_height, 4*text_width)
+        drawText("Play Game", font, WHITE, screen, text_height, 1.25*text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
+        drawText("Options", font, WHITE, screen, text_height, 3.25*text_width)
+        drawText("Settings", font, WHITE, screen, text_height, 6.25*text_width)
+        drawText("Quit", font, WHITE, screen, text_height, 9.25*text_width)
 
 
         events = pygame.event.get()
@@ -138,7 +139,8 @@ def game():
     run = True
 
     while run:
-        screen.fill(WHITE)
+        BG = pygame.transform.scale(pygame.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), (WIDTH, HEIGHT))
+        screen.blit(BG, (0, 0))
 
         drawText("Play Game", font, BLACK, screen, ( screen.get_width()/20 ), ( screen.get_height()/10 )) # Writes text onto the screen 
 
