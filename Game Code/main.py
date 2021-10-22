@@ -4,31 +4,34 @@ import os # Used to import images
 import random # Used to randomise events 
 import sys #        
 import pyautogui # Custom cursor speed
-
-
-
-PLAYER_STRIKER = 
-ENEMY_STRIKER = 
+from pygame.locals import * # Imports constants that are used by the Pygame module
 
 
 clock = pygame.time.Clock() # Creates a clock object that is used to track amount of time
-
-from pygame.locals import * # Imports constants that are used by the Pygame module
-
 pygame.init() # Initialises all imported Pygame modules 
-
 pygame.display.set_caption("Carrom Game") # Sets program caption 
 
-#CARROM_PIECE = pygame.image.load(os.path.join('images', 'carrom-piece.png'))
 
 SCREEN_SIZE = (1280, 720)
 
 screen = pygame.display.set_mode(SCREEN_SIZE, pygame.RESIZABLE) # Sets the display resolution
-
 font = pygame.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
 
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
 
+
+BLACK_PIECE = pygame.image.load(os.path.join('Game Code\Assets', 'black-piece.png'))
+#BROWN_PIECE = 
+PLAYER_STRIKER = pygame.draw.circle(screen, BLUE, (0,0), 2)
+ENEMY_STRIKER = pygame.draw.circle(screen, RED, (0,0), 2)
+
+FPS = 60 # Sets the refresh rate, i.e. 60 times a second
+
+mouse_click = False # If a click has been made by the mouse
 
 def drawText(text, font, color, surface, x, y): # Writes text onto the screen of the program
     textobj = font.render(text, 1, color)
@@ -37,53 +40,49 @@ def drawText(text, font, color, surface, x, y): # Writes text onto the screen of
     surface.blit(textobj, textrect)
 
 
-mouse_click = False # If a click has been made by the mouse
-
-FPS = 60 # Sets the refresh rate, i.e. 60 times a second
-
-BLACK = (0,0,0)
-WHITE = (255,255,255)
-RED = (255,0,0)
-
-
 def mainMenu():     
     while True:
+        mouse_click = False # If a click has been made by the mouse
+
         screen.fill(WHITE) # Fills the screen in the desired colour
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
         mx, my = pygame.mouse.get_pos() # Retrieves the current position of where the mouse is
 
-        button_1 = pygame.Rect(50,100,200,50)
-        button_2 = pygame.Rect(50,200,200,50)
-        button_3 = pygame.Rect(50,300,200,50)
-        button_4 = pygame.Rect(50,400,200,50)        
+        button_height = screen.get_height()/10
+        button_width = screen.get_width()/10
 
-        if button_1.collidepoint((mx,my)): # Checks if mouse location overlaps button 1 location
+        game_button = pygame.Rect(50,100, button_width, button_height)
+        options_button = pygame.Rect(50,100, button_width, button_height)
+        settings_button = pygame.Rect(50,100, button_width, button_height)
+        quit_button = pygame.Rect(50,100, button_width, button_height)
+
+        if game_button.collidepoint((mx,my)): # Checks if mouse location overlaps button 1 location
             if mouse_click: # Checks if button has been clicked
                 game()
-        if button_2.collidepoint((mx, my)):
+        if options_button.collidepoint((mx, my)):
             if mouse_click:
                 options()
-        if button_3.collidepoint((mx, my)): 
+        if settings_button.collidepoint((mx, my)): 
             if mouse_click:
-                import settings
-        if button_4.collidepoint((mx, my)): 
+                settings()
+        if quit_button.collidepoint((mx, my)): 
             if mouse_click:
                 quit_game()
         
-        pygame.draw.rect(screen, WHITE, button_1) # Draws a rectangle onto the screen in white colour for button 1
-        drawText("Play Game", font, BLACK, screen, (screen.get_width()/10), (screen.get_height()/6)) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
-        
-        pygame.draw.rect(screen, WHITE, button_2)
-        drawText("Options", font, BLACK, screen, (screen.get_width()/10), (screen.get_height()*2/6))
-        
-        pygame.draw.rect(screen, WHITE, button_3)
-        drawText("Settings", font, BLACK, screen, (screen.get_width()/10), (screen.get_height()*3/6))
+        pygame.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
+        pygame.draw.rect(screen, BLACK, options_button)
+        pygame.draw.rect(screen, BLACK, settings_button)
+        pygame.draw.rect(screen, BLACK, quit_button)
 
-        pygame.draw.rect(screen, WHITE, button_4)
-        drawText("Quit", font, BLACK, screen, (screen.get_width()/10), (screen.get_height()*4/6))
+        text_width = screen.get_width()/10
+        text_height = screen.get_height()/6
 
-        mouse_click = False
+        drawText("Play Game", font, BLACK, screen, text_height, text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
+        drawText("Options", font, BLACK, screen, text_height, 2*text_width)
+        drawText("Settings", font, BLACK, screen, text_height, 3*text_width)
+        drawText("Quit", font, BLACK, screen, text_height, 4*text_width)
+
 
         events = pygame.event.get()
         for event in events:
@@ -100,6 +99,38 @@ def mainMenu():
 
         pygame.display.update() # Updates display
         clock.tick(FPS) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
