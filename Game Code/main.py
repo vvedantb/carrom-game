@@ -6,23 +6,20 @@ import sys #
 import pyautogui # Custom cursor speed
 from pygame.locals import * # Imports constants that are used by the Pygame module
 
-
 clock = pygame.time.Clock() # Creates a clock object that is used to track amount of time
 pygame.init() # Initialises all imported Pygame modules 
 pygame.display.set_caption("Carrom Game") # Sets program caption 
 
+WIDTH, HEIGHT = 1280, 720
 
-SCREEN_SIZE = (1280, 720)
-
-screen = pygame.display.set_mode(SCREEN_SIZE, pygame.RESIZABLE) # Sets the display resolution
-font = pygame.font.SysFont('Arial Bold', 40) # Sets the font used within the program
-
-
+BROWN = (164,116,73)
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
+screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE) # Sets the display resolution
+font = pygame.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
 BLACK_PIECE = pygame.image.load(os.path.join('Game Code\Assets', 'black-piece.png'))
 #BROWN_PIECE = 
@@ -33,18 +30,20 @@ FPS = 60 # Sets the refresh rate, i.e. 60 times a second
 
 mouse_click = False # If a click has been made by the mouse
 
+
+
 def drawText(text, font, color, surface, x, y): # Writes text onto the screen of the program
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
     textrect.topleft = (x,y)
     surface.blit(textobj, textrect)
 
-
+    
 def mainMenu():     
     while True:
+        screen.fill(BROWN)
         mouse_click = False # If a click has been made by the mouse
 
-        screen.fill(WHITE) # Fills the screen in the desired colour
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
         mx, my = pygame.mouse.get_pos() # Retrieves the current position of where the mouse is
