@@ -10,7 +10,7 @@ clock = pygame.time.Clock() # Creates a clock object that is used to track amoun
 pygame.init() # Initialises all imported Pygame modules 
 pygame.display.set_caption("Carrom Game") # Sets program caption 
 
-WIDTH, HEIGHT = 1000, 1000
+WIDTH, HEIGHT = 1600, 900
 
 BROWN = (164,116,73)
 BLACK = (0,0,0)
@@ -47,29 +47,19 @@ def mainMenu():
 
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
-        mx, my = pygame.mouse.get_pos() # Retrieves the current position of where the mouse is
-
         button_height = screen.get_height()/20
         button_width = screen.get_width()/10
 
-        game_button = pygame.Rect(button_width, button_height, 3*button_width, button_height)
-        options_button = pygame.Rect(button_width, 3*button_height, 3*button_width, button_height)
-        settings_button = pygame.Rect(button_width, 6*button_height, 3*button_width, button_height)
-        quit_button = pygame.Rect(button_width, 9*button_height, 2*button_width, button_height)
+        #1- x coordinate
+        #2- y coordinate
+        #3- button width
+        #4- button height 
+        game_button = pygame.Rect(button_width-20, (WIDTH/10)+10, 3*button_width, button_height)
+        options_button = pygame.Rect(button_width-20, (2*WIDTH/10)+10, 3*button_width, button_height)
+        settings_button = pygame.Rect(button_width-20, (3*WIDTH/10), 3*button_width, button_height)
+        quit_button = pygame.Rect(button_width-20, (4*WIDTH/10), 3*button_width, button_height)
 
-        if game_button.collidepoint((mx,my)): # Checks if mouse location overlaps button 1 location
-            if mouse_click: # Checks if button has been clicked
-                game()
-        if options_button.collidepoint((mx, my)):
-            if mouse_click:
-                options()
-        if settings_button.collidepoint((mx, my)): 
-            if mouse_click:
-                settings()
-        if quit_button.collidepoint((mx, my)): 
-            if mouse_click:
-                quit_game()
-        
+      
         pygame.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
         pygame.draw.rect(screen, BLACK, options_button)
         pygame.draw.rect(screen, BLACK, settings_button)
@@ -78,11 +68,10 @@ def mainMenu():
         text_width = screen.get_width()/10
         text_height = screen.get_height()/6
 
-        drawText("Play Game", font, WHITE, screen, text_height, 1.25*text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
-        drawText("Options", font, WHITE, screen, text_height, 3.25*text_width)
-        drawText("Settings", font, WHITE, screen, text_height, 6.25*text_width)
-        drawText("Quit", font, WHITE, screen, text_height, 9.25*text_width)
-
+        drawText("Play Game", font, WHITE, screen, text_height, 1.1*text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
+        drawText("Options", font, WHITE, screen, text_height, 2.1*text_width)
+        drawText("Settings", font, WHITE, screen, text_height, 3.1*text_width)
+        drawText("Quit", font, WHITE, screen, text_height, 4.1*text_width)
 
         events = pygame.event.get()
         for event in events:
@@ -96,6 +85,21 @@ def mainMenu():
             if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
                 if event.button == 1: # Checks if button has been clicked
                     mouse_click = True
+
+        mx, my = pygame.mouse.get_pos() # Retrieves the current position of where the mouse is
+
+        if game_button.collidepoint((mx, my)): # Checks if mouse location overlaps button 1 location
+            if mouse_click: # Checks if button has been clicked
+                game()
+        if options_button.collidepoint((mx, my)):
+            if mouse_click:
+                options()
+        if settings_button.collidepoint((mx, my)): 
+            if mouse_click:
+                settings()
+        if quit_button.collidepoint((mx, my)): 
+            if mouse_click:
+                quit_game()
 
         pygame.display.update() # Updates display
         clock.tick(FPS) 
@@ -139,8 +143,10 @@ def game():
     run = True
 
     while run:
-        BG = pygame.transform.scale(pygame.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), (WIDTH, HEIGHT))
-        screen.blit(BG, (0, 0))
+        screen.fill(BROWN)
+        BOARD_WIDTH, BOARD_HEIGHT = 900, 900
+        BG = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), (BOARD_WIDTH, BOARD_HEIGHT)), 89.5)
+        screen.blit(BG, (int(WIDTH/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
 
         drawText("Play Game", font, BLACK, screen, ( screen.get_width()/20 ), ( screen.get_height()/10 )) # Writes text onto the screen 
 
@@ -166,7 +172,7 @@ def game():
 def options():
     run = True
     while run:
-        screen.fill(WHITE)
+        screen.fill(BROWN)
         drawText('Options', font, BLACK, screen, 20, 20)
         
         button_7 = pygame.Rect(20,60,300,50)
@@ -193,7 +199,7 @@ def settings():
     run = True
     
     while run:
-        screen.fill(BLACK)
+        screen.fill(BROWN)
 
         drawText('Settings', font, WHITE, screen, 20, 20)
 
@@ -217,7 +223,7 @@ def settings():
 def quit_game():
     run = True
     while run:
-        screen.fill(BLACK)
+        screen.fill(BROWN)
 
         drawText('Quit?', font, BLACK, screen, 20, 20)
         drawText('Press Q to confirm', font, BLACK, screen, 20, 60)
