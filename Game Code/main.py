@@ -1,4 +1,4 @@
-import pygame # Used to create GUI
+import pygame as p # Used to create GUI
 import time # Used to set refresh rate
 import os # Used to import images
 import random # Used to randomise events 
@@ -6,9 +6,9 @@ import sys #
 import pyautogui # Custom cursor speed
 from pygame.locals import * # Imports constants that are used by the Pygame module
 
-clock = pygame.time.Clock() # Creates a clock object that is used to track amount of time
-pygame.init() # Initialises all imported Pygame modules 
-pygame.display.set_caption("Carrom Game") # Sets program caption 
+clock = p.time.Clock() # Creates a clock object that is used to track amount of time
+p.init() # Initialises all imported Pygame modules 
+p.display.set_caption("Carrom Game") # Sets program caption 
 
 WIDTH, HEIGHT = 1600, 900
 
@@ -21,13 +21,13 @@ DARK_GREY = (125, 125, 125)
 LIGHT_BROWN = (191, 134, 0)
 
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE) # Sets the display resolution
-font = pygame.font.SysFont('Arial Bold', 40) # Sets the font used within the program
+screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display resolution
+font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
-BLACK_PIECE = pygame.image.load(os.path.join('Game Code\Assets', 'black-piece.png'))
+BLACK_PIECE = p.image.load(os.path.join('Game Code\Assets', 'black-piece.png'))
 #BROWN_PIECE = 
-PLAYER_STRIKER = pygame.draw.circle(screen, BLUE, (0,0), 2)
-ENEMY_STRIKER = pygame.draw.circle(screen, RED, (0,0), 2)
+PLAYER_STRIKER = p.draw.circle(screen, BLUE, (0,0), 2)
+ENEMY_STRIKER = p.draw.circle(screen, RED, (0,0), 2)
 
 FPS = 60 # Sets the refresh rate, i.e. 60 times a second
 
@@ -53,16 +53,16 @@ def mainMenu():
         button_height = screen.get_height()/20
         button_width = screen.get_width()/10
 
-        game_button = pygame.Rect(button_width-20, (WIDTH/10)+5, button_width, button_height)
-        options_button = pygame.Rect(button_width-20, (2*WIDTH/10)+5, button_width, button_height)
-        settings_button = pygame.Rect(button_width-20, (3*WIDTH/10)+5, button_width, button_height)
-        quit_button = pygame.Rect(button_width-20, (4*WIDTH/10)+5, button_width/2, button_height)
+        game_button = p.Rect(button_width-20, (WIDTH/10)+5, button_width, button_height)
+        options_button = p.Rect(button_width-20, (2*WIDTH/10)+5, button_width, button_height)
+        settings_button = p.Rect(button_width-20, (3*WIDTH/10)+5, button_width, button_height)
+        quit_button = p.Rect(button_width-20, (4*WIDTH/10)+5, button_width/2, button_height)
 
       
-        pygame.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
-        pygame.draw.rect(screen, BLACK, options_button)
-        pygame.draw.rect(screen, BLACK, settings_button)
-        pygame.draw.rect(screen, BLACK, quit_button)
+        p.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
+        p.draw.rect(screen, BLACK, options_button)
+        p.draw.rect(screen, BLACK, settings_button)
+        p.draw.rect(screen, BLACK, quit_button)
 
         text_width = screen.get_width()/10
         text_height = screen.get_height()/6
@@ -72,20 +72,20 @@ def mainMenu():
         drawText("Settings", font, WHITE, screen, text_height, 3.1*text_width)
         drawText("Quit", font, WHITE, screen, text_height, 4.1*text_width)
 
-        events = pygame.event.get()
+        events = p.event.get()
         for event in events:
             if event.type == QUIT: # Checks if the cross (top right button) has been pressed
-                pygame.quit() # Program ends
+                p.quit() # Program ends
                 sys.exit()
             if event.type == KEYDOWN: # Checks if a key has been pressed
                 if event.key == K_ESCAPE: # Checks if escape key has been pressed
-                    pygame.quit() # Programs ends
+                    p.quit() # Programs ends
                     sys.exit()
             if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
                 if event.button == 1: # Checks if button has been clicked
                     mouse_click = True
 
-        mx, my = pygame.mouse.get_pos() # Retrieves the current position of where the mouse is
+        mx, my = p.mouse.get_pos() # Retrieves the current position of where the mouse is
 
         if game_button.collidepoint((mx, my)): # Checks if mouse location overlaps button 1 location
             if mouse_click: # Checks if button has been clicked
@@ -100,7 +100,7 @@ def mainMenu():
             if mouse_click:
                 quit_game()
 
-        pygame.display.update() # Updates display
+        p.display.update() # Updates display
         clock.tick(FPS) 
 
 
@@ -144,15 +144,15 @@ def game():
     while run:
         screen.fill(BROWN)
         BOARD_WIDTH, BOARD_HEIGHT = 900, 900
-        BG = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), ((int(screen.get_width()*0.5625)), screen.get_height())), 89.5)
+        BG = p.transform.rotate(p.transform.scale(p.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), ((int(screen.get_width()*0.5625)), screen.get_height())), 89.5)
         screen.blit(BG, (int(screen.get_width()/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
 
         drawText("Play Game", font, BLACK, screen, 20, 20) # Writes text onto the screen 
 
-        events = pygame.event.get()
+        events = p.event.get()
         for event in events:
             if event.type == QUIT:
-                pygame.quit()
+                p.quit()
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -162,23 +162,35 @@ def game():
                 if event.key == K_SPACE:
                     striker_shot()
 
-        pygame.draw.circle(screen, RED, (2*WIDTH/6, 2*HEIGHT/8), 15) 
-        pygame.draw.circle(screen, RED, (2*WIDTH/6, 6*HEIGHT/8), 15) 
-        
-        pygame.draw.circle(screen, RED, (4*WIDTH/6, 2*HEIGHT/8), 15) 
-        pygame.draw.circle(screen, RED, (4*WIDTH/6, 6*HEIGHT/8), 15)
+        WIDTH = screen.get_width()
+        HEIGHT = screen.get_height()
 
-        pygame.draw.circle(screen, RED, (4*WIDTH/6 - 30, 6*HEIGHT/8 + 50), 15) 
-        pygame.draw.circle(screen, RED, (2*WIDTH/6 + 30, 6*HEIGHT/8 + 50), 15) 
+        p.draw.circle(screen, RED, (2*WIDTH/6, 2*HEIGHT/8), 15) 
+        p.draw.circle(screen, RED, (2*WIDTH/6, 6*HEIGHT/8), 15) 
         
-        pygame.draw.circle(screen, RED, (4*WIDTH/6 - 30, 2*HEIGHT/8 + 50), 15) 
-        pygame.draw.circle(screen, RED, (2*WIDTH/6 + 30, 2*HEIGHT/8), 20) # Center circle
+        p.draw.circle(screen, RED, (4*WIDTH/6, 2*HEIGHT/8), 15) 
+        p.draw.circle(screen, RED, (4*WIDTH/6, 6*HEIGHT/8), 15)
+
+        p.draw.circle(screen, RED, (4*WIDTH/6 - 30, 6*HEIGHT/8 + 50), 15) 
+        p.draw.circle(screen, RED, (2*WIDTH/6 + 30, 6*HEIGHT/8 + 50), 15) 
+        
+        p.draw.circle(screen, RED, (4*WIDTH/6 - 30, 2*HEIGHT/8 - 50), 15) 
+        p.draw.circle(screen, RED, (2*WIDTH/6 + 30, 2*HEIGHT/8 - 50), 15) # Striker boundaries
+        
+        p.draw.circle(screen, RED, (WIDTH/2, HEIGHT/2), 20) # Center circle
+
+        p.draw.circle(screen, DARK_GREY, (WIDTH/4 + 30, HEIGHT/8 - 30), 30) # Top left
+        p.draw.circle(screen, DARK_GREY, (WIDTH/4 + 30, 7*HEIGHT/8 + 30), 30) # Bottom left
+        p.draw.circle(screen, DARK_GREY, (3*WIDTH/4 - 30, HEIGHT/8 - 30), 30) # Top right
+        p.draw.circle(screen, DARK_GREY, (3*WIDTH/4 - 30, 7*HEIGHT/8 + 30), 30) # Bottom right corner holes
 
         for i in range(20):
-            pygame.draw.circle(screen, DARK_GREY, (i* WIDTH/100, HEIGHT/2), 10)
+            p.draw.circle(screen, DARK_GREY, (i* WIDTH/100, HEIGHT/2), 10)
                     
-        
-        pygame.display.update()
+        for i in range(4):
+            p.draw.rect(screen, (0,0,0), ((WIDTH/4)+i,(HEIGHT)+i,155,155), 2)
+
+        p.display.update()
         clock.tick(FPS)
 
 
@@ -245,22 +257,22 @@ def options():
         screen.fill(BROWN)
         drawText('Options', font, BLACK, screen, 20, 20)
         
-        button_7 = pygame.Rect(20,60,300,50)
-        #pygame.draw.rect(screen, WHITE, button_7)
-        pygame.draw.rect(screen, BLACK, pygame.Rect(30, 30, 60, 60),  2, 0, 0, 3)
-        pygame.draw.rect(screen, BLACK, button_7,  border_bottom_right_radius=5)
+        button_7 = p.Rect(20,60,300,50)
+        #p.draw.rect(screen, WHITE, button_7)
+        p.draw.rect(screen, BLACK, p.Rect(30, 30, 60, 60),  2, 0, 0, 3)
+        p.draw.rect(screen, BLACK, button_7,  border_bottom_right_radius=5)
         drawText('Select Striker Colour', font, BLACK, screen, 20, 60)
 
-        events = pygame.event.get()
+        events = p.event.get()
         for event in events:
             if event.type == QUIT:
-                pygame.quit()
+                p.quit()
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
 
-        pygame.display.update()
+        p.display.update()
         clock.tick(FPS)
 
 
@@ -276,16 +288,16 @@ def settings():
         drawText('X-Senstivity', font, WHITE, screen, 20, 60)
         drawText('Y-Senstivity', font, WHITE, screen, 20, 100)
         
-        events = pygame.event.get()
+        events = p.event.get()
         for event in events:
             if event.type == QUIT:
-                pygame.quit()
+                p.quit()
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
         
-        pygame.display.update()
+        p.display.update()
         clock.tick(FPS)
 
 
@@ -299,10 +311,10 @@ def quit_game():
         drawText('Press Q to confirm', font, BLACK, screen, 20, 60)
         drawText('Press ESC to return', font, BLACK, screen, 20, 100)
         
-        events = pygame.event.get()
+        events = p.event.get()
         for event in events:
             if event.type == QUIT:
-                pygame.quit()
+                p.quit()
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -310,9 +322,9 @@ def quit_game():
             if event.type == KEYDOWN:
                 if event.key == K_q:
                     run = False
-                    pygame.quit()
+                    p.quit()
         
-        pygame.display.update()
+        p.display.update()
         clock.tick(FPS)
 
 
@@ -338,7 +350,7 @@ class Piece():
         self.show()
 
     def show():
-        pygame.draw.rect(self.screen, self.color, (self.posX, self.posY, self.width, self.height))
+        p.draw.rect(self.screen, self.color, (self.posX, self.posY, self.width, self.height))
 
     def move(self):
         if self.state == 'up':
@@ -352,7 +364,7 @@ class Score:
         self.points = points
         self.posX = posX
         self.posY = posY
-        self.font = pygame.font.SysFont("monospace", 80, bold=True)
+        self.font = p.font.SysFont("monospace", 80, bold=True)
         self.label = self.font.render(self.points, 0, WHITE)
         self.show()
 
