@@ -12,11 +12,14 @@ pygame.display.set_caption("Carrom Game") # Sets program caption
 
 WIDTH, HEIGHT = 1600, 900
 
-BROWN = (164,116,73)
+BROWN = (138, 87, 0)
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
+DARK_GREY = (125, 125, 125)
+LIGHT_BROWN = (191, 134, 0)
+
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE) # Sets the display resolution
 font = pygame.font.SysFont('Arial Bold', 40) # Sets the font used within the program
@@ -50,14 +53,10 @@ def mainMenu():
         button_height = screen.get_height()/20
         button_width = screen.get_width()/10
 
-        #1- x coordinate
-        #2- y coordinate
-        #3- button width
-        #4- button height 
-        game_button = pygame.Rect(button_width-20, (WIDTH/10)+10, 3*button_width, button_height)
-        options_button = pygame.Rect(button_width-20, (2*WIDTH/10)+10, 3*button_width, button_height)
-        settings_button = pygame.Rect(button_width-20, (3*WIDTH/10), 3*button_width, button_height)
-        quit_button = pygame.Rect(button_width-20, (4*WIDTH/10), 3*button_width, button_height)
+        game_button = pygame.Rect(button_width-20, (WIDTH/10)+5, button_width, button_height)
+        options_button = pygame.Rect(button_width-20, (2*WIDTH/10)+5, button_width, button_height)
+        settings_button = pygame.Rect(button_width-20, (3*WIDTH/10)+5, button_width, button_height)
+        quit_button = pygame.Rect(button_width-20, (4*WIDTH/10)+5, button_width/2, button_height)
 
       
         pygame.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
@@ -145,10 +144,10 @@ def game():
     while run:
         screen.fill(BROWN)
         BOARD_WIDTH, BOARD_HEIGHT = 900, 900
-        BG = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), (BOARD_WIDTH, BOARD_HEIGHT)), 89.5)
-        screen.blit(BG, (int(WIDTH/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
+        BG = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), ((int(screen.get_width()*0.5625)), screen.get_height())), 89.5)
+        screen.blit(BG, (int(screen.get_width()/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
 
-        drawText("Play Game", font, BLACK, screen, ( screen.get_width()/20 ), ( screen.get_height()/10 )) # Writes text onto the screen 
+        drawText("Play Game", font, BLACK, screen, 20, 20) # Writes text onto the screen 
 
         events = pygame.event.get()
         for event in events:
@@ -162,10 +161,81 @@ def game():
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
                     striker_shot()
+
+        pygame.draw.circle(screen, RED, (2*WIDTH/6, 2*HEIGHT/8), 15) 
+        pygame.draw.circle(screen, RED, (2*WIDTH/6, 6*HEIGHT/8), 15) 
+        
+        pygame.draw.circle(screen, RED, (4*WIDTH/6, 2*HEIGHT/8), 15) 
+        pygame.draw.circle(screen, RED, (4*WIDTH/6, 6*HEIGHT/8), 15)
+
+        pygame.draw.circle(screen, RED, (4*WIDTH/6 - 30, 6*HEIGHT/8 + 50), 15) 
+        pygame.draw.circle(screen, RED, (2*WIDTH/6 + 30, 6*HEIGHT/8 + 50), 15) 
+        
+        pygame.draw.circle(screen, RED, (4*WIDTH/6 - 30, 2*HEIGHT/8 + 50), 15) 
+        pygame.draw.circle(screen, RED, (2*WIDTH/6 + 30, 2*HEIGHT/8), 20) # Center circle
+
+        for i in range(20):
+            pygame.draw.circle(screen, DARK_GREY, (i* WIDTH/100, HEIGHT/2), 10)
                     
         
         pygame.display.update()
         clock.tick(FPS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
