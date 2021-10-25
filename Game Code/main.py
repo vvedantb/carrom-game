@@ -6,6 +6,8 @@ import sys #
 import pyautogui # Custom cursor speed
 from pygame.locals import * # Imports constants that are used by the Pygame module
 
+from striker import Striker
+
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
 p.init() # Initialises all imported Pygame modules 
 p.display.set_caption("Carrom Game") # Sets program caption 
@@ -148,6 +150,9 @@ def game():
         screen.blit(BG, (int(screen.get_width()/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
 
         drawText("Play Game", font, BLACK, screen, 20, 20) # Writes text onto the screen 
+
+        player_striker = Striker.draw_circle(screen, RED, (BOARD_WIDTH/2, BOARD_HEIGHT/2), 15)
+        enemy_striker = Striker.draw_circle(screen, BLUE, (BOARD_WIDTH/2 + 15, BOARD_HEIGHT/2), 15)
 
         events = p.event.get()
         for event in events:
