@@ -7,6 +7,7 @@ import pyautogui # Custom cursor speed
 import math # For collision function
 from pygame.locals import * # Imports constants that are used by the Pygame module
 from striker import Striker
+#from start_menu import *
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
 p.init() # Initialises all imported Pygame modules 
@@ -127,7 +128,7 @@ def mainMenu():
             if mouse_click:
                 play_music(button_width, button_height, text_height, text_width)
 
-        p.display.update() # Updates display
+        p.display.flip() # Updates display
         clock.tick(FPS) 
 
 
@@ -171,7 +172,7 @@ def game():
     while run:
         screen.fill(BROWN)
         BOARD_WIDTH, BOARD_HEIGHT = 900, 900
-        BG = p.transform.rotate(p.transform.scale(p.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), ((int(screen.get_width()*0.5625)), screen.get_height())), 89.5)
+        BG = p.transform.rotate(p.transform.scale(p.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), ((int(screen.get_width()*0.5625)), screen.get_height())), 89.5) # TODO: Change this line
         screen.blit(BG, (int(screen.get_width()/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
 
         drawText("Play Game", font, BLACK, screen, 20, 20) # Writes text onto the screen 
@@ -377,9 +378,9 @@ def quit_game():
     while run:
         screen.fill(BROWN)
 
-        drawText('Quit?', font, BLACK, screen, 20, 20)
-        drawText('Press Q to confirm', font, BLACK, screen, 20, 60)
-        drawText('Press ESC to return', font, BLACK, screen, 20, 100)
+        drawText('Are you sure you would like to quit?', font, WHITE, screen, 20, 220)
+        drawText('Press "Q" to confirm', font, WHITE, screen, 20, 320)
+        drawText('Press ESC to return to the main menu', font, WHITE, screen, 20, 420)
         
         events = p.event.get()
         for event in events:
