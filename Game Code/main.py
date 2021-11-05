@@ -77,7 +77,7 @@ def mainMenu():
         options_button = p.Rect(button_width-20, (2*WIDTH/10)+5, button_width, button_height)
         settings_button = p.Rect(button_width-20, (3*WIDTH/10)+5, button_width, button_height)
         quit_button = p.Rect(button_width-20, (4*WIDTH/10)+5, button_width/2, button_height)
-        music_button = p.Rect(button_width-20, 6*WIDTH/10, button_width, button_height)
+        music_button = p.Rect(button_width-20, (6*WIDTH/10)+5, button_width, button_height)
 
       
         p.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
@@ -230,8 +230,9 @@ def game():
 def play_music():
     run = True
     while run:
-        drawText('Press "Y" to enable music', font, BLACK, screen, 20, 20)
-        drawText('Press "N" to disable music', font, BLACK, screen, 100, 20)
+        drawText('Press "Y" to start music', font, BLACK, screen, 20, 20)
+        drawText('Press "N" to stop music', font, BLACK, screen, 60, 20)
+        drawText('Press "P" to pause music', font, BLACK, screen, 100, 20)
         
         events = p.event.get()
         for event in events:
