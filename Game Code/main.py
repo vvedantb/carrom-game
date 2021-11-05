@@ -5,7 +5,6 @@ import random # Used to randomise events
 import sys #        
 import pyautogui # Custom cursor speed
 from pygame.locals import * # Imports constants that are used by the Pygame module
-
 from striker import Striker
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time

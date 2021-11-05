@@ -19,3 +19,4 @@ class Striker:
 
     
     def return_to_base(self):
+        pass
