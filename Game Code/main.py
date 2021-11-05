@@ -4,12 +4,21 @@ import os # Used to import images
 import random # Used to randomise events 
 import sys #        
 import pyautogui # Custom cursor speed
+import math # For collision function
 from pygame.locals import * # Imports constants that are used by the Pygame module
 from striker import Striker
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
 p.init() # Initialises all imported Pygame modules 
+
 p.display.set_caption("Carrom Game") # Sets program caption 
+icon = p.image.load("Game Code/icon.png") # Loads the icon image
+p.display.set_icon(icon) # Sets the icon image
+
+
+# p.mixer.music.load("Game Code/wholeotherwave.wav") # Loads the music file
+# p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
+# p.mixer.music.set_volume(0.25) # Sets the music volume
 
 WIDTH, HEIGHT = 1600, 900
 
@@ -21,11 +30,14 @@ BLUE = (0, 0, 255)
 DARK_GREY = (125, 125, 125)
 LIGHT_BROWN = (191, 134, 0)
 
+Board = p.image.load("Game Code/board.jpg")
+
 
 screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display resolution
+p.font.init()
 font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
-BLACK_PIECE = p.image.load(os.path.join('Game Code\Assets', 'black-piece.png'))
+BLACK_PIECE = p.image.load("Game Code/Assets/black-piece.png")
 #BROWN_PIECE = 
 PLAYER_STRIKER = p.draw.circle(screen, BLUE, (0,0), 2)
 ENEMY_STRIKER = p.draw.circle(screen, RED, (0,0), 2)
@@ -35,6 +47,13 @@ FPS = 60 # Sets the refresh rate, i.e. 60 times a second
 mouse_click = False # If a click has been made by the mouse
 
 screen.fill(BROWN)
+
+
+
+
+def collide(p1, p2):
+    pass
+
 
 
 def drawText(text, font, color, surface, x, y): # Writes text onto the screen of the program
@@ -58,12 +77,14 @@ def mainMenu():
         options_button = p.Rect(button_width-20, (2*WIDTH/10)+5, button_width, button_height)
         settings_button = p.Rect(button_width-20, (3*WIDTH/10)+5, button_width, button_height)
         quit_button = p.Rect(button_width-20, (4*WIDTH/10)+5, button_width/2, button_height)
+        music_button = p.Rect(button_width-20, 6*WIDTH/10, button_width, button_height)
 
       
         p.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
         p.draw.rect(screen, BLACK, options_button)
         p.draw.rect(screen, BLACK, settings_button)
         p.draw.rect(screen, BLACK, quit_button)
+        p.draw.rect(screen, BLACK, music_button)
 
         text_width = screen.get_width()/10
         text_height = screen.get_height()/6
@@ -72,6 +93,7 @@ def mainMenu():
         drawText("Options", font, WHITE, screen, text_height, 2.1*text_width)
         drawText("Settings", font, WHITE, screen, text_height, 3.1*text_width)
         drawText("Quit", font, WHITE, screen, text_height, 4.1*text_width)
+        drawText("Play Music?", font, WHITE, screen, text_height, 5.1*text_width)
 
         events = p.event.get()
         for event in events:
@@ -100,6 +122,9 @@ def mainMenu():
         if quit_button.collidepoint((mx, my)): 
             if mouse_click:
                 quit_game()
+        if music_button.collidepoint((mx, my)):
+            if mouse_click:
+                play_music()
 
         p.display.update() # Updates display
         clock.tick(FPS) 
@@ -202,7 +227,30 @@ def game():
 
 
 
+def play_music():
+    run = True
+    while run:
+        drawText('Press "Y" to enable music', font, BLACK, screen, 20, 20)
+        drawText('Press "N" to disable music', font, BLACK, screen, 100, 20)
+        
+        events = p.event.get()
+        for event in events:
+            if event.type == QUIT:
+                p.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    run = False
+                if event.key == K_y:
+                    p.mixer.music.load("Game Code/wholeotherwave.wav") # Loads the music file
+                    p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
+                    p.mixer.music.set_volume(0.25) # Sets the music volume
+                if event.key == K_n:
+                    pygame.mixer.music.stop()
+                
 
+        p.display.update()
+        clock.tick(FPS)    
 
 
 
