@@ -7,6 +7,7 @@ import pyautogui # Custom cursor speed
 import math # For collision function
 from pygame.locals import * # Imports constants that are used by the Pygame module
 from striker import Striker
+from piece import Piece
 #from start_menu import *
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
@@ -137,35 +138,6 @@ def mainMenu():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def game():    
     run = True
 
@@ -273,55 +245,6 @@ def play_music(button_width, button_height, text_height, text_width):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def options():
     run = True
     while run:
@@ -404,51 +327,9 @@ mainMenu()
 
         
 
-class Piece():
-    def __init__(self, screen, color, posX, posY, radius, width, height ):
-        self.screen = screen 
-        self.color = color
-        self.posX = posX
-        self.posY = posY
-        self.radius = radius
-        self.width = width
-        self.height = height
-        self.state = 'stopped'
 
-        # Ball Movement
-        self.dx = 0
-        self.dy = 0
-        self.show()
 
-    def show():
-        p.draw.rect(self.screen, self.color, (self.posX, self.posY, self.width, self.height))
 
-    def move(self):
-        if self.state == 'up':
-            self.posX += self.dx
-        elif self.state == 'down':
-            self.posY = self.dy
-
-class Score:
-    def __init__(self, screen, points, posX, posY):
-        self.screen = screen
-        self.points = points
-        self.posX = posX
-        self.posY = posY
-        self.font = p.font.SysFont("monospace", 80, bold=True)
-        self.label = self.font.render(self.points, 0, WHITE)
-        self.show()
-
-    def show(self):
-        self.screen.blit(self.label, (self.posX - self.label.get_rect().width//2, self.posY))
-
-    def increase(self):
-        points = int(self.points) + 1
-        self.points = str(points)
-        self.label = self.font.render(self.points, 0, WHITE)
-
-class CollisionManager:
-    pass
 
     
     
