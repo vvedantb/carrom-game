@@ -8,6 +8,7 @@ import math # For collision function
 from pygame.locals import * # Imports constants that are used by the Pygame module
 from striker import Striker
 from piece import Piece
+import math
 #from start_menu import *
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
@@ -64,6 +65,10 @@ def drawText(text, font, color, surface, x, y): # Writes text onto the screen of
     textrect = textobj.get_rect()
     textrect.topleft = (x,y)
     surface.blit(textobj, textrect)
+
+
+def draw_board():
+    pass
 
 
 def mainMenu():     
@@ -133,7 +138,16 @@ def mainMenu():
         clock.tick(FPS) 
 
 
-
+def draw_pieces():
+    board_pieces = []
+    pieces_height = 1 # in cm
+    pieces_radius = 1.5 # in cm
+    pieces_size = (math.pi)*pieces_height*pieces_radius  # Height x Radius x Pi^2
+    pieces_mass = 5 # in grams
+    piece = Piece(DARK_GREY, x, y, (), pieces_mass)
+    for piece in range(0, 10):
+        piece.show()
+        #board_pieces.append(piece)
 
 
 
@@ -167,6 +181,9 @@ def game():
 
         WIDTH = screen.get_width()
         HEIGHT = screen.get_height()
+
+        draw_pieces()
+
 
         p.draw.circle(screen, RED, (2*WIDTH/6, 2*HEIGHT/8), 15) 
         p.draw.circle(screen, RED, (2*WIDTH/6, 6*HEIGHT/8), 15) 
