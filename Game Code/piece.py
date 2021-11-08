@@ -2,17 +2,16 @@ import pygame as p
 
 class Piece:
     def __init__(self, color, x, y, size, mass):
-        self.x = x
-        self.y = y
+        self.x,y = x,y
         self.color = color
         self.size = size
         self.mass = mass
 
         self.speed = 0
-        self.mass = 0
+        self.angle = 0
 
     def show(self, x, y):
-        pygame.draw.circle(screen, self.colour, int(self.x), int(self.y), self.size)
+        pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), self.size)
 
 
     def move(self):

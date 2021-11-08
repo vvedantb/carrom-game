@@ -140,21 +140,54 @@ def mainMenu():
 
 def draw_pieces():
     board_pieces = []
+    
     pieces_height = 1 # in cm
-    pieces_radius = 1.5 # in cm
-    pieces_size = (math.pi)*pieces_height*pieces_radius  # Height x Radius x Pi^2
+    pieces_radius = 2 # in cm
+
+    pieces_size = int((math.pi)*(pieces_radius^2))  # Height x Radius x Pi^2
     pieces_mass = 5 # in grams
-    piece = Piece(DARK_GREY, x, y, (), pieces_mass)
-    for piece in range(0, 10):
-        piece.show()
-        #board_pieces.append(piece)
+    #piece = Piece(DARK_GREY, WIDTH/6, HEIGHT/2, pieces_size, pieces_mass)
+
+
+    
+    piece_1 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_1)
+    
+    piece_2 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_2)
+    
+    piece_3 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_3)
+    
+    piece_4 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_4)
+    
+    piece_5 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_5)
+    
+    piece_6 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_6)
+    
+    piece_7 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_7)
+    
+    piece_8 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_8)
+    
+    piece_9 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_9)
+    
+    piece_10 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+    board_pieces.append(piece_10)
+
+    print(board_pieces)
+
 
 
 
 
 def game():    
     run = True
-
     while run:
         screen.fill(BROWN)
         BOARD_WIDTH, BOARD_HEIGHT = 900, 900
@@ -187,16 +220,16 @@ def game():
 
         p.draw.circle(screen, RED, (2*WIDTH/6, 2*HEIGHT/8), 15) 
         p.draw.circle(screen, RED, (2*WIDTH/6, 6*HEIGHT/8), 15) 
-        
+
         p.draw.circle(screen, RED, (4*WIDTH/6, 2*HEIGHT/8), 15) 
         p.draw.circle(screen, RED, (4*WIDTH/6, 6*HEIGHT/8), 15)
 
         p.draw.circle(screen, RED, (4*WIDTH/6 - 30, 6*HEIGHT/8 + 50), 15) 
         p.draw.circle(screen, RED, (2*WIDTH/6 + 30, 6*HEIGHT/8 + 50), 15) 
-        
+
         p.draw.circle(screen, RED, (4*WIDTH/6 - 30, 2*HEIGHT/8 - 50), 15) 
         p.draw.circle(screen, RED, (2*WIDTH/6 + 30, 2*HEIGHT/8 - 50), 15) # Striker boundaries
-        
+
         p.draw.circle(screen, RED, (WIDTH/2, HEIGHT/2), 20) # Center circle
 
         p.draw.circle(screen, DARK_GREY, (WIDTH/4 + 30, HEIGHT/8 - 30), 30) # Top left
