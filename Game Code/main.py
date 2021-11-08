@@ -19,7 +19,7 @@ icon = p.image.load("Game Code/icon.png") # Loads the icon image
 p.display.set_icon(icon) # Sets the icon image
 
 
-# p.mixer.music.load("Game Code/wholeotherwave.wav") # Loads the music file
+# p.mixer.music.load("Game Code/music.wav") # Loads the music file
 # p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
 # p.mixer.music.set_volume(0.25) # Sets the music volume
 
@@ -271,7 +271,7 @@ def play_music(button_width, button_height, text_height, text_width):
                 if event.key == K_ESCAPE:
                     run = False
                 if event.key == K_y:
-                    p.mixer.music.load("Game Code/wholeotherwave.wav") # Loads the music file
+                    p.mixer.music.load("Game Code/music.wav") # Loads the music file
                     p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
                     p.mixer.music.set_volume(0.25) # Sets the music volume
                     
