@@ -57,6 +57,20 @@ My final solution will include the following modules:
 
 The following code is the first iteration of the module that I have programmed.
 
+
+
+```python
+def drawText(text, font, color, surface, x, y): # Writes text onto the screen of the program
+    textobj = font.render(text, 1, color)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x,y)
+    surface.blit(textobj, textrect)
+```
+
+​	
+
+
+
 ### Testing of prototype 1
 
 | Test No. | Test Description | Outcome | Notes |
