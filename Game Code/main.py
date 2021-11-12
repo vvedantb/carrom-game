@@ -40,11 +40,7 @@ Board = p.image.load("Game Code/board.jpg")
 
 screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display resolution
 p.font.init()
-font1 = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
-font2 = p.font.SysFont('Arial Bold', 30) # Sets the font used within the program
-font3 = p.font.SysFont('Arial Bold', 20) # Sets the font used within the program
-font4 = p.font.SysFont('Arial Bold', 10) # Sets the font used within the program
-font5 = p.font.SysFont('Arial Bold', 5) # Sets the font used within the program
+font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
 BLACK_PIECE = p.image.load("Game Code/Assets/black-piece.png")
 #BROWN_PIECE = 
@@ -65,8 +61,8 @@ def collide(p1, p2):
 
 
 
-def drawText(text, font1, color, surface, x, y): # Writes text onto the screen of the program
-    textobj = font1.render(text, 1, color)
+def drawText(text, font, color, surface, x, y): # Writes text onto the screen of the program
+    textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
     textrect.topleft = (x,y)
     surface.blit(textobj, textrect)
@@ -81,7 +77,7 @@ def mainMenu():
         screen.fill(BROWN)
         mouse_click = False # If a click has been made by the mouse
 
-        drawText("Main Menu", font1, WHITE, screen, 20, 20)
+        drawText("Main Menu", font, WHITE, screen, 20, 20)
 
         button_height = screen.get_height()/20
         button_width = screen.get_width()/10
@@ -102,11 +98,11 @@ def mainMenu():
         text_width = screen.get_width()/10
         text_height = screen.get_height()/6
 
-        drawText("Play Game", font1, WHITE, screen, text_height, 1.1*text_width) # Writes text onto the screen with the specified font1 at the start with a black colour onto the screen
-        drawText("Options", font1, WHITE, screen, text_height, 2.1*text_width)
-        drawText("Settings", font1, WHITE, screen, text_height, 3.1*text_width)
-        drawText("Quit", font1, WHITE, screen, text_height, 4.1*text_width)
-        drawText("Music", font1, WHITE, screen, text_height, 5.1*text_width)
+        drawText("Play Game", font, WHITE, screen, text_height, 1.1*text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
+        drawText("Options", font, WHITE, screen, text_height, 2.1*text_width)
+        drawText("Settings", font, WHITE, screen, text_height, 3.1*text_width)
+        drawText("Quit", font, WHITE, screen, text_height, 4.1*text_width)
+        drawText("Music", font, WHITE, screen, text_height, 5.1*text_width)
 
         events = p.event.get()
         for event in events:
@@ -199,7 +195,7 @@ def game():
         BG = p.transform.rotate(p.transform.scale(p.image.load(os.path.join('Game Code\Assets', 'carrom-board.jpg')), ((int(screen.get_width()*0.5625)), screen.get_height())), 89.5) # TODO: Change this line
         screen.blit(BG, (int(screen.get_width()/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
 
-        drawText("Play Game", font1, BLACK, screen, 20, 20) # Writes text onto the screen 
+        drawText("Play Game", font, BLACK, screen, 20, 20) # Writes text onto the screen 
 
         player_striker = Striker.draw_circle(screen, RED, (BOARD_WIDTH/2, BOARD_HEIGHT/2), 15)
         enemy_striker = Striker.draw_circle(screen, BLUE, (BOARD_WIDTH/2 + 15, BOARD_HEIGHT/2), 15)
@@ -259,11 +255,11 @@ def game():
 def play_music(button_width, button_height, text_height, text_width):
     run = True
     while run:
-        drawText('Press "ESC" to exit music', font1, BLACK, screen, 500, 400)
-        drawText('Press "Y" to start music', font1, BLACK, screen, 500, 500)
-        drawText('Press "N" to stop music', font1, BLACK, screen, 500, 600)
-        drawText('Press "P" to pause music', font1, BLACK, screen, 500, 700)
-        drawText('Press "O" to resume music', font1, BLACK, screen, 500, 800)
+        drawText('Press "ESC" to exit music', font, BLACK, screen, 500, 400)
+        drawText('Press "Y" to start music', font, BLACK, screen, 500, 500)
+        drawText('Press "N" to stop music', font, BLACK, screen, 500, 600)
+        drawText('Press "P" to pause music', font, BLACK, screen, 500, 700)
+        drawText('Press "O" to resume music', font, BLACK, screen, 500, 800)
 
         music_button = p.Rect(button_width-20, (5*WIDTH/10)+5, button_width+50, button_height)
         
@@ -281,19 +277,19 @@ def play_music(button_width, button_height, text_height, text_width):
                     p.mixer.music.set_volume(0.25) # Sets the music volume
                     
                     p.draw.rect(screen, GREEN, music_button)
-                    drawText("Playing Music", font1, WHITE, screen, text_height, 5.1*text_width)
+                    drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
                 if event.key == K_n:
                     p.mixer.music.stop()
                     p.draw.rect(screen, RED, music_button)
-                    drawText("Stopped", font1, WHITE, screen, text_height, 5.1*text_width)
+                    drawText("Stopped", font, WHITE, screen, text_height, 5.1*text_width)
                 if event.key == K_p:
                     p.mixer.music.pause()
                     p.draw.rect(screen, BLUE, music_button)
-                    drawText("Paused", font1, WHITE, screen, text_height, 5.1*text_width)
+                    drawText("Paused", font, WHITE, screen, text_height, 5.1*text_width)
                 if event.key == K_o:
                     p.mixer.music.unpause()
                     p.draw.rect(screen, GREEN, music_button)
-                    drawText("Playing Music", font1, WHITE, screen, text_height, 5.1*text_width)
+                    drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
 
         p.display.update()
         clock.tick(FPS)    
@@ -305,23 +301,23 @@ def options():
     run = True
     while run:
         screen.fill(BROWN)
-        drawText('Options', font1, WHITE, screen, 20, 20)
+        drawText('Options', font, WHITE, screen, 20, 20)
         
         button_7 = p.Rect(20,60,300,50)
         p.draw.rect(screen, BLACK, button_7,  border_bottom_right_radius=5)
-        drawText('Select Striker Colour', font1, WHITE, screen, 30, 70)
+        drawText('Select Striker Colour', font, WHITE, screen, 30, 70)
 
         
         test_button = Button(
-            BLACK,
-            40,
-            70,
-            20,
-            80,
-            "idk"
+            WHITE,
+            30,
+            170,
+            500,
+            50,
+            "Select Striker Colour"
         )
        
-        test_button.draw(screen, 18)
+        test_button.draw(screen, 30)
 
 
         events = p.event.get()
@@ -344,10 +340,10 @@ def settings():
     while run:
         screen.fill(BROWN)
 
-        drawText('Settings', font1, WHITE, screen, 20, 20)
+        drawText('Settings', font, WHITE, screen, 20, 20)
 
-        drawText('X-Senstivity', font1, WHITE, screen, 20, 60)
-        drawText('Y-Senstivity', font1, WHITE, screen, 20, 100)
+        drawText('X-Senstivity', font, WHITE, screen, 20, 60)
+        drawText('Y-Senstivity', font, WHITE, screen, 20, 100)
         
         events = p.event.get()
         for event in events:
@@ -368,9 +364,9 @@ def quit_game():
     while run:
         screen.fill(BROWN)
 
-        drawText('Are you sure you would like to quit?', font1, WHITE, screen, 20, 220)
-        drawText('Press "Q" to confirm', font1, WHITE, screen, 20, 320)
-        drawText('Press ESC to return to the main menu', font1, WHITE, screen, 20, 420)
+        drawText('Are you sure you would like to quit?', font, WHITE, screen, 20, 220)
+        drawText('Press "Q" to confirm', font, WHITE, screen, 20, 320)
+        drawText('Press ESC to return to the main menu', font, WHITE, screen, 20, 420)
         
         events = p.event.get()
         for event in events:
