@@ -19,12 +19,16 @@ class Piece:
         self.angle = 0
 
     def draw(self):
+        outline = 2
         if self.state == "queen":
             self.color = (153, 0, 102)
         elif self.state == "brown":
             self.color = (173, 94, 46)
         elif self.state == "black":
             self.color = (72, 73, 76)
+        
+        p.draw.circle(screen, (255,255,255), (int(self.x), int(self.y)), 12, 0)
+        
         p.draw.circle(screen, self.color, (int(self.x), int(self.y)), self.size)
 
     def get_width(self):
