@@ -65,14 +65,14 @@ def collide(p1, p2):
 def event_manager():
     events = p.event.get()
     for event in events:
-        if event.type == QUIT:
-            p.quit()
+        if event.type == QUIT: # Checks if the cross (top right button) has been pressed
+            p.quit() # Program ends
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 run = False
-        if event.type == MOUSEBUTTONDOWN:
-            if event.button == 1:
+        if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
+            if event.button == 1: # Checks if button has been clicked
                 mouse_click = True    
 
 
@@ -142,7 +142,8 @@ def mainMenu():
                 sys.exit()
             if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
                 if event.button == 1: # Checks if button has been clicked
-                    mouse_click = True
+                    mouse_click = True    
+
 
         if game_button.mouse_collide() and mouse_click == True:
             game()
@@ -394,17 +395,7 @@ def play_music():
         )
         resume_music_button.draw(screen, BLACK, 30, CRIMSON)
 
-        events = p.event.get()
-        for event in events:
-            if event.type == QUIT:
-                p.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    run = False
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    mouse_click = True
+        event_manager()
 
         if return_button.mouse_collide() and mouse_click == True:
             run = False
@@ -467,17 +458,7 @@ def options():
 
         test2_button.draw(screen, BLACK, 30, CRIMSON)
 
-        events = p.event.get()
-        for event in events:
-            if event.type == QUIT:
-                p.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    run = False
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    mouse_click = True
+        event_manager()
 
         if test_button.mouse_collide() and mouse_click == True:
             print("It works!")
