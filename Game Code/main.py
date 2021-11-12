@@ -172,10 +172,27 @@ def mainMenu(screen):
                 else:
                     game_button.color = WHITE
                 
+                if options_button.mouse_collide():
+                    options_button.color = RED
+                else:
+                    options_button.color = WHITE
+
+                if settings_button.mouse_collide():
+                    settings_button.color = RED
+                else:
+                    settings_button.color = WHITE  
+
+                if quit_button.mouse_collide():
+                    quit_button.color = RED
+                else:
+                    quit_button.color = WHITE                                      
+
                 if play_music_button.mouse_collide():
                     play_music_button.color = RED
                 else:
                     play_music_button.color = WHITE
+
+                
 
 
 
@@ -602,59 +619,77 @@ def play_music():
 
 def resolution_settings(screen):
     run = True
-    while run:
-        screen.fill(BROWN)
-        mouse_click = False
 
-        res1_button = Button(
+    res1_button = Button(
             color=WHITE,
             x=30,
             y=170,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="1280x720"
         )
-        res1_button.draw(screen, WHITE, 30, CRIMSON)
 
-        res2_button = Button(
+    res2_button = Button(
             color=WHITE,
             x=30,
             y=370,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="1600x900"
-        )
-        res2_button.draw(screen, WHITE, 30, CRIMSON)     
+        )        
 
-        res3_button = Button(
+    res3_button = Button(
             color=WHITE,
             x=30,
             y=570,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="1920x1080"
-        )
-        res3_button.draw(screen, WHITE, 30, CRIMSON)  
+        )    
 
-        res4_button = Button(
+    res4_button = Button(
             color=WHITE,
             x=30,
             y=770,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Apply Fullscreen"
-        )
-        res4_button.draw(screen, WHITE, 30, CRIMSON)                           
+        )       
 
-        back_button = Button(
+    back_button = Button(
             color=BLACK,
             x=30,
             y=970,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Back"
-        )
-        back_button.draw(screen, WHITE, 30, CRIMSON)   
+        )             
+
+    while run:
+        screen.fill(BROWN)
+        mouse_click = False
+
+
+        res1_button.draw(screen)
+        res2_button.draw(screen)
+        res3_button.draw(screen)
+        res4_button.draw(screen)
+        back_button.draw(screen)
 
         events = p.event.get()
         for event in events:
@@ -692,50 +727,66 @@ def resolution_settings(screen):
 
 def options(screen):
     run = True
-    while run:
-        screen.fill(BROWN)
-        mouse_click = False
-        drawText('Options', font, WHITE, screen, 20, 20)
-        
-        return_button = Button(
+
+    return_button = Button(
             color=BLACK,
             x=30,
             y=70,
             width=500,
             height=50,
+            text_color=WHITE,
+            text_size=30,
+            outline=CRIMSON,             
             text="Return to main menu"
         )
-        return_button.draw(screen, WHITE, 30, CRIMSON)
 
-        test_button = Button(
+    test_button = Button(
             color=WHITE,
             x=30,
             y=170,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Select Striker Colour"
-        )
-        test_button.draw(screen, BLACK, 30, CRIMSON)
+        )        
 
-        test2_button = Button(
+    test2_button = Button(
             color=WHITE,
             x=30,
             y=370,
             width=500, 
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Select Pieces Colour"
         )
-        test2_button.draw(screen, BLACK, 30, CRIMSON)
 
-        resolution_button = Button(
+    resolution_button = Button(
             color=WHITE,
             x=30,
             y=570,
             width=500, 
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Change resolution"
-        )
-        resolution_button.draw(screen, BLACK, 30, CRIMSON)
+        )        
+
+    while run:
+        screen.fill(BROWN)
+        mouse_click = False
+        drawText('Options', font, WHITE, screen, 20, 20)
+        
+
+        return_button.draw(screen)
+        test_button.draw(screen)
+        test2_button.draw(screen)
+        resolution_button.draw(screen)
+
 
         events = p.event.get()
         for event in events:
@@ -775,6 +826,42 @@ def options(screen):
 def settings():
 
     run = True
+
+    return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=500,
+            height=50,
+            text_color=WHITE,
+            text_size=30,
+            outline=CRIMSON,                        
+            text="Return to main menu"
+        )    
+
+    x_sensitivity_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,                        
+            text="X-Sensitivity"
+        )  
+
+    y_sensitivity_button = Button(
+            color=WHITE,
+            x=30,
+            y=370,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,                        
+            text="Y-Sensitivity"
+        )              
     
     while run:
         screen.fill(BROWN)
@@ -782,36 +869,11 @@ def settings():
 
         drawText('Settings', font, WHITE, screen, 20, 20)
 
-        return_button = Button(
-            color=BLACK,
-            x=30,
-            y=70,
-            width=500,
-            height=50,
-            text="Return to main menu"
-        )
+        return_button.draw(screen)
+        x_sensitivity_button.draw(screen)
+        y_sensitivity_button.draw(screen)
 
-        return_button.draw(screen, WHITE, 30, CRIMSON)
 
-        x_sensitivity_button = Button(
-            color=WHITE,
-            x=30,
-            y=170,
-            width=500,
-            height=50,
-            text="X-Sensitivity"
-        )
-        x_sensitivity_button.draw(screen, text_color=BLACK, text_size=30, outline=CRIMSON)
-      
-        y_sensitivity_button = Button(
-            color=WHITE,
-            x=30,
-            y=370,
-            width=500,
-            height=50,
-            text="Y-Sensitivity"
-        )
-        y_sensitivity_button.draw(screen, text_color=BLACK, text_size=30, outline=CRIMSON)
 
         events = p.event.get()
         for event in events:
@@ -847,34 +909,39 @@ def settings():
 
 def quit_game():
     run = True
+
+    return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=500,
+            height=50,
+            text_color=WHITE,
+            text_size=30,
+            outline=CRIMSON,                        
+            text="Return to main menu"
+        )
+
+    confirm_quit_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,                        
+            text="Click to quit"
+        )        
+
     while run:
         screen.fill(BROWN)
         mouse_click = False
 
         drawText('Are you sure you would like to quit?', font, WHITE, screen, 20, 220)
       
-
-        return_button = Button(
-            color=BLACK,
-            x=30,
-            y=70,
-            width=500,
-            height=50,
-            text="Return to main menu"
-        )
-        return_button.draw(screen, WHITE, 30, CRIMSON)
-
-        confirm_quit_button = Button(
-            color=WHITE,
-            x=30,
-            y=170,
-            width=500,
-            height=50,
-            text="Click to quit"
-        )
-        confirm_quit_button.draw(screen, BLACK, 30, CRIMSON)
-
-
+        return_button.draw(screen)
+        confirm_quit_button.draw(screen)
 
         
         events = p.event.get()
