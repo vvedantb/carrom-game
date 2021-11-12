@@ -214,8 +214,16 @@ def mainMenu(screen):
 
 
 def draw_pieces():
-    piece1 = Piece(DARK_GREY, ( WIDTH/2 ), ( HEIGHT/2 ), )
-    piece2 = Piece()
+    piece1 = Piece(
+        x=( 800 ), 
+        y=( 1000 ), 
+        size=15, 
+        mass=1, 
+        state="queen")
+    piece1.draw()
+
+    #piece2 = Piece(DARK_GREY, ( WIDTH/2 ), ( 100000/HEIGHT ), 15, 1, "normal")
+    #piece2.draw()
 
 
 
@@ -248,6 +256,8 @@ def game():
         WIDTH = screen.get_width()
         HEIGHT = screen.get_height()
 
+        draw_pieces()
+
         # draw_pieces()
 
 
@@ -270,11 +280,11 @@ def game():
         # p.draw.circle(screen, DARK_GREY, (3*WIDTH/4 - 30, HEIGHT/8 - 30), 30) # Top right
         # p.draw.circle(screen, DARK_GREY, (3*WIDTH/4 - 30, 7*HEIGHT/8 + 30), 30) # Bottom right corner holes
 
-        for i in range(20):
-            p.draw.circle(screen, DARK_GREY, (i* WIDTH/100, HEIGHT/2), 10)
+        # for i in range(20):
+        #     p.draw.circle(screen, DARK_GREY, (i* WIDTH/100, HEIGHT/2), 10)
                     
-        for i in range(4):
-            p.draw.rect(screen, (0,0,0), ((WIDTH/4)+i,(HEIGHT)+i,155,155), 2)
+        # for i in range(4):
+        #     p.draw.rect(screen, (0,0,0), ((WIDTH/4)+i,(HEIGHT)+i,155,155), 2)
 
         p.display.update()
         clock.tick(FPS)

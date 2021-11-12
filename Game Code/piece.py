@@ -6,35 +6,36 @@ screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display res
 clock = p.time.Clock()
 
 class Piece:
-    def __init__(self, color, x, y, radius, width, size, mass):
-        self.color = color
-        self.x = x
-        self.y = y
-        self.radius = radius
-        self.width = width
+    def __init__(self, x, y, size, mass, state, color=None):
+    
+        self.x, self.y = x, y
         self.size = size
         self.mass = mass
+        self.state = state
+        if self.state == "queen":
+            self.color = (153, 0, 102)
+        elif self.state == "brown":
+            self.color = (101, 67, 33)
+        elif self.state == "black":
+            self.color = (0, 0, 0)
+        self.color = color
 
         self.speed = 0
         self.angle = 0
 
+    def draw(self):
+        p.draw.circle(
+            screen, 
+            self.color, 
+            int(self.x), int(self.y), 
+            self.size
+        )
+
     def show(self, x, y):
         pass
-
-
-    def draw(self, screen, color, center, radius, width):
-        p.draw.circle(screen, self.colour, (int(self.x), int(self.y)), self.size)
 
     def move(self):
         pass
 
     def bounce(self):
         pass
-
-
-
-    # def move(self):
-    #     if self.state == 'up':
-    #         self.posX += self.dx
-    #     elif self.state == 'down':
-    #         self.posY = self.dy
