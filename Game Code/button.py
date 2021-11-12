@@ -7,32 +7,22 @@ clock = p.time.Clock()
 #font = p.font.SysFont("Calibri", 20)
 
 
-
+#Some help from TechWithTim: https://www.youtube.com/watch?v=4_9twnEduFA
 class Button:
-    def __init__(self, bg_color, text_color, text, font, pos, size):
-        self.bg_color = bg_color
-        self.text_color = text_color
-        if self.text == "":
-            self.text = "Test"
-        else:
-            self.text = text
-        self.font = font
-        self.x, self.y = pos
-        self.width, self.height = size
+    def __init__(self, color, x, y, width, height, text=''):
+        self.color = color
+        self.x = x
+        self. y = y
+        self.width = width
+        self.height = height
+        self.text = text
 
-    def show(self):   
-        screen.blit(self.surface, (self.x, self.y))
+    def draw(self, screen, font_size, outline=None):
+        if outline:
+            p.draw.rect(screen, outline, ( self.x-2, self.y-2, self.width+4, self.height+4 ), 0)
+        p.draw.rect(screen, self.color, ( self.x, self.y, self.width, self.height ), 0)
 
-    def draw_text(self):
-        textobj = self.font.render(self.text, 1, self.text_color)
-        textrect = textobj.get_rect()
-        textrect.topleft = (self.x, self.y)
-        surface.blit(textobj, textrect)
-
-    # def draw_text(text, font, color, surface, x, y):
-    #     textobj = font.render(text, 1, color)
-    #     textrect = textobj.get_rect()
-    #     textrect.topleft = (x,y)
-    #     surface.blit(textobj, textrect)
-
-#    def change_text(self):
+        if self.text != "":
+            font = p.font.SysFont("Arial", font_size)
+            text = font.render(self.text, 1, ( 0, 0, 0 ))
+            screen.blit(text, ( self.x + ( self.width/2 - text.get_width()/2, self.y + ( self.height/2 - text.get_height()/2 ) ) ))
