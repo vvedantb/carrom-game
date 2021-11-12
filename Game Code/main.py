@@ -9,6 +9,7 @@ from pygame.locals import * # Imports constants that are used by the Pygame modu
 from striker import Striker
 from piece import Piece
 import math
+
 #from start_menu import *
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
@@ -294,18 +295,22 @@ def play_music(button_width, button_height, text_height, text_width):
         clock.tick(FPS)    
 
 
+from button import Button
 
 def options():
     run = True
     while run:
         screen.fill(BROWN)
-        drawText('Options', font, BLACK, screen, 20, 20)
+        drawText('Options', font, WHITE, screen, 20, 20)
         
         button_7 = p.Rect(20,60,300,50)
-        #p.draw.rect(screen, WHITE, button_7)
-        p.draw.rect(screen, BLACK, p.Rect(30, 30, 60, 60),  2, 0, 0, 3)
         p.draw.rect(screen, BLACK, button_7,  border_bottom_right_radius=5)
-        drawText('Select Striker Colour', font, BLACK, screen, 20, 60)
+        drawText('Select Striker Colour', font, WHITE, screen, 30, 70)
+
+        test_button = Button(BLACK, WHITE, "test", font, (40, 70), (20, 80))
+        test_button.show()
+        test_button.draw_text()
+
 
         events = p.event.get()
         for event in events:
