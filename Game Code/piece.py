@@ -22,9 +22,9 @@ class Piece:
         if self.state == "queen":
             self.color = (153, 0, 102)
         elif self.state == "brown":
-            self.color = (101, 67, 33)
+            self.color = (173, 94, 46)
         elif self.state == "black":
-            self.color = (0, 0, 0)
+            self.color = (72, 73, 76)
         p.draw.circle(screen, self.color, (int(self.x), int(self.y)), self.size)
 
     def get_width(self):

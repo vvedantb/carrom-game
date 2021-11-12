@@ -214,7 +214,10 @@ def mainMenu(screen):
 
 
 def draw_pieces():
-    queen_piece = Piece(
+    
+    # Inner layer
+
+    queen_piece = Piece( # Middle piece
         x=WIDTH/2, 
         y=HEIGHT/2, 
         size=15, 
@@ -223,17 +226,17 @@ def draw_pieces():
     )
     queen_piece.draw()
 
-    brown_piece1 = Piece(
-        x=(WIDTH/2)+30, 
-        y=(HEIGHT/2)-30, 
+    brown_piece1 = Piece( # Top left piece
+        x=(WIDTH/2)-30, 
+        y=(HEIGHT/2)-15, 
         size=15, 
         mass=1, 
         state="brown"
     )
     brown_piece1.draw()
 
-    brown_piece2 = Piece(
-        x=(WIDTH/2)-30, 
+    brown_piece2 = Piece( # Botton piece
+        x=(WIDTH/2), 
         y=(HEIGHT/2)+30, 
         size=15, 
         mass=1, 
@@ -241,7 +244,75 @@ def draw_pieces():
     )
     brown_piece2.draw()  
 
-    black_piece1 = Piece(
+    brown_piece3 = Piece( # Top right piece
+        x=(WIDTH/2)+30, 
+        y=(HEIGHT/2)-15, 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece3.draw()  
+
+    # BROWN OUTER LAYER
+
+    brown_piece4 = Piece( # Left piece
+        x=(WIDTH/2)-60, 
+        y=(HEIGHT/2), 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece4.draw()  
+
+
+    brown_piece5 = Piece( # Right piece
+        x=(WIDTH/2)+60, 
+        y=(HEIGHT/2), 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece5.draw()  
+    
+    brown_piece6 = Piece( # Top left piece
+        x=(WIDTH/2)-30, 
+        y=(HEIGHT/2)-45, 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece6.draw()   
+
+    brown_piece7 = Piece( # Top right piece
+        x=(WIDTH/2)+30, 
+        y=(HEIGHT/2)-45, 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece7.draw()   
+
+    brown_piece8 = Piece( # Bottom left piece
+        x=(WIDTH/2)-30, 
+        y=(HEIGHT/2)+45, 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece8.draw()    
+
+    brown_piece9 = Piece( # Bottom right piece
+        x=(WIDTH/2)+30, 
+        y=(HEIGHT/2)+45, 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece9.draw()               
+
+    # BLACK INNER LAYER
+
+    black_piece1 = Piece( #Top piece
         x=(WIDTH/2), 
         y=(HEIGHT/2)-30, 
         size=15, 
@@ -250,7 +321,7 @@ def draw_pieces():
     )
     black_piece1.draw()   
 
-    black_piece2 = Piece(
+    black_piece2 = Piece( #Bottom right piece
         x=(WIDTH/2)+30, 
         y=(HEIGHT/2)+15, 
         size=15, 
@@ -259,20 +330,70 @@ def draw_pieces():
     )
     black_piece2.draw()         
 
-    black_piece3 = Piece(
+    black_piece3 = Piece( #Bottom left piece
         x=(WIDTH/2)-30, 
+        y=(HEIGHT/2)+15, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece3.draw()  
+
+    # BLACK OUTER LAYER 
+
+    black_piece4 = Piece( # Top middle piece
+        x=(WIDTH/2), 
+        y=(HEIGHT/2)-60, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece4.draw()      
+
+    black_piece5 = Piece( # Top left piece
+        x=(WIDTH/2)-60, 
         y=(HEIGHT/2)-30, 
         size=15, 
         mass=1, 
         state="black"
     )
-    black_piece3.draw()      
+    black_piece5.draw()    
 
-    
+    black_piece6 = Piece( # Top right piece
+        x=(WIDTH/2)+60, 
+        y=(HEIGHT/2)-30, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece6.draw()    
 
-    #piece2 = Piece(DARK_GREY, ( WIDTH/2 ), ( 100000/HEIGHT ), 15, 1, "normal")
-    #piece2.draw()
+    black_piece7 = Piece( # Bottom left piece
+        x=(WIDTH/2)-60, 
+        y=(HEIGHT/2)+30, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece7.draw()       
 
+    black_piece8 = Piece( # Bottom right piece
+        x=(WIDTH/2)+60, 
+        y=(HEIGHT/2)+30, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece8.draw()         
+
+    black_piece9 = Piece( # Bottom middle piece
+        x=(WIDTH/2), 
+        y=(HEIGHT/2)+60, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece9.draw()      
 
 
 def game():    
@@ -666,7 +787,7 @@ def settings():
             # TODO: Change x-sensitivity
 
         if return_button.mouse_collide() and mouse_click == True:
-            mainMenu()        
+            mainMenu(screen)        
         
         p.display.update()
         clock.tick(FPS)
