@@ -1,4 +1,9 @@
-import pygame as p
+import pygame as p #Allows p to be referred as "p" at any point in the program
+p.font.init() #Initialises the font module
+
+WIDTH, HEIGHT = 1600, 900 
+screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display resolution
+clock = p.time.Clock()
 
 class Piece:
     def __init__(self, color, x, y, size, mass):

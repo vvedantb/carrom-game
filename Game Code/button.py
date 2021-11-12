@@ -4,7 +4,6 @@ p.font.init() #Initialises the font module
 WIDTH, HEIGHT = 1600, 900 
 screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display resolution
 clock = p.time.Clock()
-#font = p.font.SysFont("Calibri", 20)
 
 
 #Some help from TechWithTim: https://www.youtube.com/watch?v=4_9twnEduFA
@@ -19,8 +18,8 @@ class Button:
 
     def draw(self, screen, text_color, text_size, outline=None):
         if outline:
-            p.draw.rect(screen, outline, ( self.x-2, self.y-2, self.width+4, self.height+4 ), 0)
-        p.draw.rect(screen, self.color, ( self.x, self.y, self.width, self.height ), 0)
+            p.draw.rect(screen, outline, ( self.x-2, self.y-2, self.width+4, self.height+4 ), 0, 10)
+        p.draw.rect(screen, self.color, ( self.x, self.y, self.width, self.height ), 0, 10)
 
         if self.text != "":
             font = p.font.SysFont("Arial", text_size)
