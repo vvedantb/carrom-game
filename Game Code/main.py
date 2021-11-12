@@ -28,6 +28,7 @@ WIDTH, HEIGHT = 1600, 900
 
 BROWN = (138, 87, 0)
 BLACK = (0,0,0)
+CRIMSON = (220,20,60)
 WHITE = (255,255,255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -301,6 +302,7 @@ def options():
     run = True
     while run:
         screen.fill(BROWN)
+        mouse_click = False
         drawText('Options', font, WHITE, screen, 20, 20)
         
         button_7 = p.Rect(20,60,300,50)
@@ -317,7 +319,7 @@ def options():
             "Select Striker Colour"
         )
        
-        test_button.draw(screen, 30)
+        test_button.draw(screen, BLACK, 30, CRIMSON)
 
 
         events = p.event.get()
@@ -328,6 +330,13 @@ def options():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_click = True
+
+        if test_button.mouse_collide() and mouse_click == True:
+            print("It works!")
+        #     pass # Put striker colour as whatever specificed
 
         p.display.update()
         clock.tick(FPS)
