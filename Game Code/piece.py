@@ -6,9 +6,12 @@ screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display res
 clock = p.time.Clock()
 
 class Piece:
-    def __init__(self, color, x, y, size, mass):
-        self.x,y = x,y
+    def __init__(self, color, x, y, radius, width, size, mass):
         self.color = color
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.width = width
         self.size = size
         self.mass = mass
 
@@ -16,8 +19,11 @@ class Piece:
         self.angle = 0
 
     def show(self, x, y):
-        pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), self.size)
+        pass
 
+
+    def draw(self, screen, color, center, radius, width):
+        p.draw.circle(screen, self.colour, (int(self.x), int(self.y)), self.size)
 
     def move(self):
         pass

@@ -21,11 +21,8 @@ icon = p.image.load("Game Code/icon.png") # Loads the icon image
 p.display.set_icon(icon) # Sets the icon image
 
 
-# p.mixer.music.load("Game Code/music.wav") # Loads the music file
 # p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
-# p.mixer.music.set_volume(0.25) # Sets the music volume
 
-WIDTH, HEIGHT = 1600, 900
 
 BROWN = (138, 87, 0)
 BLACK = (0,0,0)
@@ -39,8 +36,11 @@ LIGHT_BROWN = (191, 134, 0)
 
 Board = p.image.load("Game Code/board.png")
 
-
+WIDTH, HEIGHT = 1600, 900
 screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display resolution
+screen.fill(BROWN)
+
+
 p.font.init()
 font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
@@ -53,7 +53,7 @@ FPS = 60 # Sets the refresh rate, i.e. 60 times a second
 
 mouse_click = False # If a click has been made by the mouse
 
-screen.fill(BROWN)
+
 
 
 def event_manager():
@@ -82,10 +82,11 @@ def draw_board():
 
 
 
-def mainMenu():
+def mainMenu(screen):
     while True:
         screen.fill(BROWN)
         mouse_click = False
+        
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
         game_button = Button(
@@ -153,7 +154,7 @@ def mainMenu():
             game()
 
         if options_button.mouse_collide() and mouse_click == True:
-            options()
+            options(screen)
 
         if settings_button.mouse_collide() and mouse_click == True:
             settings()
@@ -168,51 +169,53 @@ def mainMenu():
         clock.tick(FPS) 
 
 
+# def draw_pieces():
+#     board_pieces = []
+    
+#     pieces_height = 1 # in cm
+#     pieces_radius = 2 # in cm
+
+#     pieces_size = int((math.pi)*(pieces_radius^2))  # Height x Radius x Pi^2
+#     pieces_mass = 5 # in grams
+#     #piece = Piece(DARK_GREY, WIDTH/6, HEIGHT/2, pieces_size, pieces_mass)
+
+#     piece_1 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_1)
+    
+#     piece_2 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_2)
+    
+#     piece_3 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_3)
+    
+#     piece_4 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_4)
+    
+#     piece_5 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_5)
+    
+#     piece_6 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_6)
+    
+#     piece_7 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_7)
+    
+#     piece_8 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_8)
+    
+#     piece_9 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_9)
+    
+#     piece_10 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
+#     board_pieces.append(piece_10)
+
+#     print(board_pieces)
+
+
+
 def draw_pieces():
-    board_pieces = []
-    
-    pieces_height = 1 # in cm
-    pieces_radius = 2 # in cm
-
-    pieces_size = int((math.pi)*(pieces_radius^2))  # Height x Radius x Pi^2
-    pieces_mass = 5 # in grams
-    #piece = Piece(DARK_GREY, WIDTH/6, HEIGHT/2, pieces_size, pieces_mass)
-
-
-    
-    piece_1 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_1)
-    
-    piece_2 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_2)
-    
-    piece_3 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_3)
-    
-    piece_4 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_4)
-    
-    piece_5 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_5)
-    
-    piece_6 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_6)
-    
-    piece_7 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_7)
-    
-    piece_8 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_8)
-    
-    piece_9 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_9)
-    
-    piece_10 = Piece(DARK_GREY, WIDTH/10, HEIGHT/10, pieces_size, pieces_mass)
-    board_pieces.append(piece_10)
-
-    print(board_pieces)
-
-
+    piece1 = Piece(DARK_GREY, ( WIDTH/2 ), ( HEIGHT/2 ), )
+    piece2 = Piece()
 
 
 
@@ -368,93 +371,11 @@ def play_music():
         clock.tick(FPS)
 
 
-def options():
+
+
+def resolution_settings(screen):
     run = True
     while run:
-        screen.fill(BROWN)
-        mouse_click = False
-        drawText('Options', font, WHITE, screen, 20, 20)
-        
-        return_button = Button(
-            color=BLACK,
-            x=30,
-            y=70,
-            width=500,
-            height=50,
-            text="Return to main menu"
-        )
-
-        return_button.draw(screen, WHITE, 30, CRIMSON)
-
-        test_button = Button(
-            color=WHITE,
-            x=30,
-            y=170,
-            width=500,
-            height=50,
-            text="Select Striker Colour"
-        )
-       
-        test_button.draw(screen, BLACK, 30, CRIMSON)
-
-        test2_button = Button(
-            color=WHITE,
-            x=30,
-            y=370,
-            width=500, 
-            height=50,
-            text="Select Pieces Colour"
-        )
-
-        test2_button.draw(screen, BLACK, 30, CRIMSON)
-
-
-        resolution_button = Button(
-            color=WHITE,
-            x=30,
-            y=570,
-            width=500, 
-            height=50,
-            text="Change resolution"
-        )
-        resolution_button.draw(screen, BLACK, 30, CRIMSON)
-
-        events = p.event.get()
-        for event in events:
-            if event.type == QUIT: # Checks if the cross (top right button) has been pressed
-                p.quit() # Program ends
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    run = False
-            if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
-                if event.button == 1: # Checks if button has been clicked
-                    mouse_click = True    
-
-
-        if test_button.mouse_collide() and mouse_click == True:
-            print("It works!")
-            # TODO: Put striker colour as whatever specificed
-    
-        if test2_button.mouse_collide() and mouse_click == True:
-            print("This also works!")
-            # TODO: Put pieces colour as whatever specified
-
-        if return_button.mouse_collide() and mouse_click == True:
-            mainMenu()
-
-        if resolution_button.mouse_collide() and mouse_click == True:
-            resolution_settings()
-
-        p.display.update()
-        clock.tick(FPS)
-
-
-
-def resolution_settings():
-    run = True
-    screen = p.display.set_mode((1600, 900))
-    while True:
         screen.fill(BROWN)
         mouse_click = False
 
@@ -537,6 +458,89 @@ def resolution_settings():
 
         if back_button.mouse_collide() and mouse_click == True:
             run = False
+
+
+
+
+
+def options(screen):
+    run = True
+    while run:
+        screen.fill(BROWN)
+        mouse_click = False
+        drawText('Options', font, WHITE, screen, 20, 20)
+        
+        return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=500,
+            height=50,
+            text="Return to main menu"
+        )
+        return_button.draw(screen, WHITE, 30, CRIMSON)
+
+        test_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text="Select Striker Colour"
+        )
+        test_button.draw(screen, BLACK, 30, CRIMSON)
+
+        test2_button = Button(
+            color=WHITE,
+            x=30,
+            y=370,
+            width=500, 
+            height=50,
+            text="Select Pieces Colour"
+        )
+        test2_button.draw(screen, BLACK, 30, CRIMSON)
+
+        resolution_button = Button(
+            color=WHITE,
+            x=30,
+            y=570,
+            width=500, 
+            height=50,
+            text="Change resolution"
+        )
+        resolution_button.draw(screen, BLACK, 30, CRIMSON)
+
+        events = p.event.get()
+        for event in events:
+            if event.type == QUIT: # Checks if the cross (top right button) has been pressed
+                p.quit() # Program ends
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    run = False
+            if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
+                if event.button == 1: # Checks if button has been clicked
+                    mouse_click = True    
+
+
+        if test_button.mouse_collide() and mouse_click == True:
+            print("It works!")
+            # TODO: Put striker colour as whatever specificed
+    
+        if test2_button.mouse_collide() and mouse_click == True:
+            print("This also works!")
+            # TODO: Put pieces colour as whatever specified
+
+        if return_button.mouse_collide() and mouse_click == True:
+            mainMenu(screen)
+
+        if resolution_button.mouse_collide() and mouse_click == True:
+            resolution_settings(screen)
+            break
+
+        p.display.update()
+        clock.tick(FPS)
+
 
 
 
@@ -669,7 +673,7 @@ def quit_game():
         clock.tick(FPS)
 
 
-mainMenu()
+mainMenu(screen)
 
 
         
