@@ -80,6 +80,12 @@ def mainMenu():
         mouse_click = False
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
+        button_height = screen.get_height()/20
+        button_width = screen.get_width()/10
+
+        text_width = screen.get_width()/10
+        text_height = screen.get_height()/6
+
         game_button = Button(
             color=WHITE,
             x=30,
@@ -103,8 +109,8 @@ def mainMenu():
 
         quit_button = Button(
             color=WHITE,
-            x=30,
-            y=570,
+            x=630,
+            y=170,
             width=500,
             height=50,
             text="Quit Game"
@@ -113,8 +119,8 @@ def mainMenu():
 
         play_music_button = Button(
             color=WHITE,
-            x=30,
-            y=770,
+            x=630,
+            y=370,
             width=500,
             height=50,
             text="Play music"
@@ -488,10 +494,30 @@ def quit_game():
     run = True
     while run:
         screen.fill(BROWN)
+        mouse_click = False
 
         drawText('Are you sure you would like to quit?', font, WHITE, screen, 20, 220)
-        drawText('Press "Q" to confirm', font, WHITE, screen, 20, 320)
-        drawText('Press ESC to return to the main menu', font, WHITE, screen, 20, 420)
+
+        confirm_quit_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text="Click to quit"
+        )
+        confirm_quit_button.draw(screen, BLACK, 30, CRIMSON)
+
+        return_button = Button(
+            color=WHITE,
+            x=30,
+            y=370,
+            width=500,
+            height=50,
+            text="Click to return to main menu"
+        )
+        return_button.draw(screen, BLACK, 30, CRIMSON)
+
         
         events = p.event.get()
         for event in events:
@@ -505,7 +531,17 @@ def quit_game():
                 if event.key == K_q:
                     run = False
                     p.quit()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_click = True
+
+        if confirm_quit_button.mouse_collide() and mouse_click == True:
+            run = False
+            p.quit()
         
+        if return_button.mouse_collide() and mouse_click == True:
+            run = False
+
         p.display.update()
         clock.tick(FPS)
 
