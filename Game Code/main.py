@@ -73,37 +73,53 @@ def draw_board():
     pass
 
 
-def mainMenu():     
+
+def mainMenu():
     while True:
         screen.fill(BROWN)
-        mouse_click = False # If a click has been made by the mouse
-
+        mouse_click = False
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
-        button_height = screen.get_height()/20
-        button_width = screen.get_width()/10
+        game_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text="Play Game"
+        )
+        game_button.draw(screen, BLACK, 30, CRIMSON)
 
-        game_button = p.Rect(button_width-20, (WIDTH/10)+5, button_width, button_height)
-        options_button = p.Rect(button_width-20, (2*WIDTH/10)+5, button_width, button_height)
-        settings_button = p.Rect(button_width-20, (3*WIDTH/10)+5, button_width, button_height)
-        quit_button = p.Rect(button_width-20, (4*WIDTH/10)+5, button_width/2, button_height)
-        music_button = p.Rect(button_width-20, (5*WIDTH/10)+5, button_width, button_height)
 
-      
-        p.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
-        p.draw.rect(screen, BLACK, options_button)
-        p.draw.rect(screen, BLACK, settings_button)
-        p.draw.rect(screen, BLACK, quit_button)
-        p.draw.rect(screen, BLACK, music_button)
+        options_button = Button(
+            color=WHITE,
+            x=30,
+            y=370,
+            width=500,
+            height=50,
+            text="Options"
+        )
+        options_button.draw(screen, BLACK, 30, CRIMSON)
 
-        text_width = screen.get_width()/10
-        text_height = screen.get_height()/6
+        quit_button = Button(
+            color=WHITE,
+            x=30,
+            y=570,
+            width=500,
+            height=50,
+            text="Quit Game"
+        )
+        quit_button.draw(screen, BLACK, 30, CRIMSON)
 
-        drawText("Play Game", font, WHITE, screen, text_height, 1.1*text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
-        drawText("Options", font, WHITE, screen, text_height, 2.1*text_width)
-        drawText("Settings", font, WHITE, screen, text_height, 3.1*text_width)
-        drawText("Quit", font, WHITE, screen, text_height, 4.1*text_width)
-        drawText("Music", font, WHITE, screen, text_height, 5.1*text_width)
+        play_music_button = Button(
+            color=WHITE,
+            x=30,
+            y=770,
+            width=500,
+            height=50,
+            text="Play music"
+        )
+        play_music_button.draw(screen, BLACK, 30, CRIMSON)
 
         events = p.event.get()
         for event in events:
@@ -118,26 +134,88 @@ def mainMenu():
                 if event.button == 1: # Checks if button has been clicked
                     mouse_click = True
 
-        mx, my = p.mouse.get_pos() # Retrieves the current position of where the mouse is
+        if game_button.mouse_collide() and mouse_click == True:
+            game()
 
-        if game_button.collidepoint((mx, my)): # Checks if mouse location overlaps button 1 location
-            if mouse_click: # Checks if button has been clicked
-                game()
-        if options_button.collidepoint((mx, my)):
-            if mouse_click:
-                options()
-        if settings_button.collidepoint((mx, my)): 
-            if mouse_click:
-                settings()
-        if quit_button.collidepoint((mx, my)): 
-            if mouse_click:
-                quit_game()
-        if music_button.collidepoint((mx, my)):
-            if mouse_click:
-                play_music(button_width, button_height, text_height, text_width)
+        if options_button.mouse_collide() and mouse_click == True:
+            options()
+
+        if quit_button.mouse_collide() and mouse_click == True:
+            quit_game()
+
+        if play_music_button.mouse_collide() and mouse_click == True:
+            play_music(button_width, button_height, text_height, text_width)
 
         p.display.flip() # Updates display
         clock.tick(FPS) 
+
+
+
+# def mainMenu():     
+#     while True:
+#         screen.fill(BROWN)
+#         mouse_click = False # If a click has been made by the mouse
+
+#         drawText("Main Menu", font, WHITE, screen, 20, 20)
+
+#         button_height = screen.get_height()/20
+#         button_width = screen.get_width()/10
+
+#         game_button = p.Rect(button_width-20, (WIDTH/10)+5, button_width, button_height)
+#         options_button = p.Rect(button_width-20, (2*WIDTH/10)+5, button_width, button_height)
+#         settings_button = p.Rect(button_width-20, (3*WIDTH/10)+5, button_width, button_height)
+#         quit_button = p.Rect(button_width-20, (4*WIDTH/10)+5, button_width/2, button_height)
+#         music_button = p.Rect(button_width-20, (5*WIDTH/10)+5, button_width, button_height)
+
+      
+#         p.draw.rect(screen, BLACK, game_button) # Draws a rectangle onto the screen in white colour for button 1
+#         p.draw.rect(screen, BLACK, options_button)
+#         p.draw.rect(screen, BLACK, settings_button)
+#         p.draw.rect(screen, BLACK, quit_button)
+#         p.draw.rect(screen, BLACK, music_button)
+
+#         text_width = screen.get_width()/10
+#         text_height = screen.get_height()/6
+
+#         drawText("Play Game", font, WHITE, screen, text_height, 1.1*text_width) # Writes text onto the screen with the specified font at the start with a black colour onto the screen
+#         drawText("Options", font, WHITE, screen, text_height, 2.1*text_width)
+#         drawText("Settings", font, WHITE, screen, text_height, 3.1*text_width)
+#         drawText("Quit", font, WHITE, screen, text_height, 4.1*text_width)
+#         drawText("Music", font, WHITE, screen, text_height, 5.1*text_width)
+
+#         events = p.event.get()
+#         for event in events:
+#             if event.type == QUIT: # Checks if the cross (top right button) has been pressed
+#                 p.quit() # Program ends
+#                 sys.exit()
+#             if event.type == KEYDOWN: # Checks if a key has been pressed
+#                 if event.key == K_ESCAPE: # Checks if escape key has been pressed
+#                     p.quit() # Programs ends
+#                     sys.exit()
+#             if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
+#                 if event.button == 1: # Checks if button has been clicked
+#                     mouse_click = True
+
+#         mx, my = p.mouse.get_pos() # Retrieves the current position of where the mouse is
+
+#         if game_button.collidepoint((mx, my)): # Checks if mouse location overlaps button 1 location
+#             if mouse_click: # Checks if button has been clicked
+#                 game()
+#         if options_button.collidepoint((mx, my)):
+#             if mouse_click:
+#                 options()
+#         if settings_button.collidepoint((mx, my)): 
+#             if mouse_click:
+#                 settings()
+#         if quit_button.collidepoint((mx, my)): 
+#             if mouse_click:
+#                 quit_game()
+#         if music_button.collidepoint((mx, my)):
+#             if mouse_click:
+#                 play_music(button_width, button_height, text_height, text_width)
+
+#         p.display.flip() # Updates display
+#         clock.tick(FPS) 
 
 
 def draw_pieces():
@@ -306,12 +384,12 @@ def options():
         drawText('Options', font, WHITE, screen, 20, 20)
         
         test_button = Button(
-            WHITE,
-            30,
-            170,
-            500,
-            50,
-            "Select Striker Colour"
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text="Select Striker Colour"
         )
        
         test_button.draw(screen, BLACK, 30, CRIMSON)
@@ -357,12 +435,30 @@ def settings():
     
     while run:
         screen.fill(BROWN)
+        mouse_click = False
 
         drawText('Settings', font, WHITE, screen, 20, 20)
 
-        drawText('X-Senstivity', font, WHITE, screen, 20, 60)
-        drawText('Y-Senstivity', font, WHITE, screen, 20, 100)
-        
+        x_sensitivity_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text="X-Sensitivity"
+        )
+        x_sensitivity_button.draw(screen, text_color=BLACK, text_size=30, outline=CRIMSON)
+      
+        y_sensitivity_button = Button(
+            color=WHITE,
+            x=30,
+            y=370,
+            width=500,
+            height=50,
+            text="Y-Sensitivity"
+        )
+        y_sensitivity_button.draw(screen, text_color=BLACK, text_size=30, outline=CRIMSON)
+
         events = p.event.get()
         for event in events:
             if event.type == QUIT:
@@ -371,7 +467,18 @@ def settings():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_click = True
         
+        if x_sensitivity_button.mouse_collide() and mouse_click == True:
+            print("Omg! It works!")
+            # TODO: Change x-sensitivity
+
+        if y_sensitivity_button.mouse_collide() and mouse_click == True:
+            print("Omgggg! It works!")
+            # TODO: Change x-sensitivity
+
         p.display.update()
         clock.tick(FPS)
 
