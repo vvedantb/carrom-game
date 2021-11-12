@@ -418,49 +418,6 @@ def play_music():
         clock.tick(FPS)
 
 
-# def play_music(button_width, button_height, text_height, text_width):
-#     run = True
-#     while run:
-#         drawText('Press "ESC" to exit music', font, BLACK, screen, 500, 400)
-#         drawText('Press "Y" to start music', font, BLACK, screen, 500, 500)
-#         drawText('Press "N" to stop music', font, BLACK, screen, 500, 600)
-#         drawText('Press "P" to pause music', font, BLACK, screen, 500, 700)
-#         drawText('Press "O" to resume music', font, BLACK, screen, 500, 800)
-
-#         music_button = p.Rect(button_width-20, (5*WIDTH/10)+5, button_width+50, button_height)
-        
-#         events = p.event.get()
-#         for event in events:
-#             if event.type == QUIT:
-#                 p.quit()
-#                 sys.exit()
-#             if event.type == KEYDOWN:
-#                 if event.key == K_ESCAPE:
-#                     run = False
-#                 if event.key == K_y:
-#                     p.mixer.music.load("Game Code/music.wav") # Loads the music file
-#                     p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
-#                     p.mixer.music.set_volume(0.25) # Sets the music volume
-                    
-#                     p.draw.rect(screen, GREEN, music_button)
-#                     drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
-#                 if event.key == K_n:
-#                     p.mixer.music.stop()
-#                     p.draw.rect(screen, RED, music_button)
-#                     drawText("Stopped", font, WHITE, screen, text_height, 5.1*text_width)
-#                 if event.key == K_p:
-#                     p.mixer.music.pause()
-#                     p.draw.rect(screen, BLUE, music_button)
-#                     drawText("Paused", font, WHITE, screen, text_height, 5.1*text_width)
-#                 if event.key == K_o:
-#                     p.mixer.music.unpause()
-#                     p.draw.rect(screen, GREEN, music_button)
-#                     drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
-
-#         p.display.update()
-#         clock.tick(FPS)    
-
-
 def options():
     run = True
     while run:
