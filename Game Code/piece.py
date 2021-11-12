@@ -27,19 +27,14 @@ class Piece:
             self.color = (173, 94, 46)
         elif self.state == "black":
             self.color = (72, 73, 76)
+        elif self.state == "striker":
+            self.color = (153,153,0)
         
         p.draw.circle(screen, self.color, (int(self.x), int(self.y)), self.size)
 
         p.draw.circle(screen, WHITE, (int(self.x), int(self.y)), self.size-2, 2)
 
-    def get_width(self):
-        pass
 
-    def get_height(self):
-        pass
-
-    def show(self, x, y):
-        pass
 
     def move(self):
         pass

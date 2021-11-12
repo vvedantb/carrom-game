@@ -11,8 +11,6 @@ from piece import Piece
 from button import Button
 import math
 
-#from start_menu import *
-
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
 p.init() # Initialises all imported Pygame modules 
 
@@ -23,7 +21,8 @@ p.display.set_icon(icon) # Sets the icon image
 
 # p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
 
-
+# COLOURS
+YELLOW = (240,230,140)
 BROWN = (138, 87, 0)
 BLACK = (0,0,0)
 CRIMSON = (220,20,60)
@@ -398,6 +397,16 @@ def draw_pieces():
     black_piece9.draw()      
 
 
+def draw_striker():
+    striker = Piece(
+        x=(WIDTH/2), 
+        y=(8*HEIGHT/10), 
+        size=20, 
+        mass=1, 
+        state="striker"
+    )
+    striker.draw()
+
 def game():    
     run = True
     while run:
@@ -417,15 +426,16 @@ def game():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
-
-            if event.type == KEYDOWN:
-                if event.key == K_SPACE:
-                    striker_shot()
+            # if event.type == KEYDOWN:
+            #     if event.key == K_SPACE:
+            #         striker_shot()
 
         WIDTH = screen.get_width()
         HEIGHT = screen.get_height()
 
         draw_pieces()
+        draw_striker()
+
         p.display.update()
         clock.tick(FPS)
 
@@ -601,7 +611,7 @@ def resolution_settings(screen):
             y=970,
             width=500,
             height=50,
-            text_color=BLACK,
+            text_color=WHITE,
             text_size=30,
             outline=CRIMSON,             
             text="Back"
