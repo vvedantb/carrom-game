@@ -305,11 +305,6 @@ def options():
         mouse_click = False
         drawText('Options', font, WHITE, screen, 20, 20)
         
-        button_7 = p.Rect(20,60,300,50)
-        p.draw.rect(screen, BLACK, button_7,  border_bottom_right_radius=5)
-        drawText('Select Striker Colour', font, WHITE, screen, 30, 70)
-
-        
         test_button = Button(
             WHITE,
             30,
@@ -321,6 +316,16 @@ def options():
        
         test_button.draw(screen, BLACK, 30, CRIMSON)
 
+        test2_button = Button(
+            WHITE,
+            30,
+            370,
+            500, 
+            50,
+            "Select Pieces Colour"
+        )
+
+        test2_button.draw(screen, BLACK, 30, CRIMSON)
 
         events = p.event.get()
         for event in events:
@@ -336,7 +341,11 @@ def options():
 
         if test_button.mouse_collide() and mouse_click == True:
             print("It works!")
-        #     pass # Put striker colour as whatever specificed
+            # TODO: Put striker colour as whatever specificed
+    
+        if test2_button.mouse_collide() and mouse_click == True:
+            print("This also works!")
+            # TODO: Put pieces colour as whatever specified
 
         p.display.update()
         clock.tick(FPS)
