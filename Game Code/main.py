@@ -83,62 +83,80 @@ def draw_board():
 
 
 def mainMenu(screen):
+
+    game_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text_color = BLACK,
+            text_size = 30,
+            outline=CRIMSON,
+            text="Play Game"
+        )
+
+    options_button = Button(
+            color=WHITE,
+            x=30,
+            y=370,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,
+            text="Options"
+        )        
+
+
+    settings_button = Button(
+            color=WHITE,
+            x=30,
+            y=570,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,
+            text="Settings"
+        )     
+
+    quit_button = Button(
+            color=WHITE,
+            x=630,
+            y=170,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,
+            text="Quit Game"
+        )
+
+    play_music_button = Button(
+            color=WHITE,
+            x=630,
+            y=370,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,            
+            text="Play music"
+        )           
+
+
     while True:
         screen.fill(BROWN)
         mouse_click = False
         
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
-        game_button = Button(
-            color=WHITE,
-            x=30,
-            y=170,
-            width=500,
-            height=50,
-            text="Play Game"
-        )
-        game_button.draw(screen, BLACK, 30, CRIMSON)
-
-
-        options_button = Button(
-            color=WHITE,
-            x=30,
-            y=370,
-            width=500,
-            height=50,
-            text="Options"
-        )
-        options_button.draw(screen, BLACK, 30, CRIMSON)
-
-        settings_button = Button(
-            color=WHITE,
-            x=30,
-            y=570,
-            width=500,
-            height=50,
-            text="Settings"
-        )
-        settings_button.draw(screen, BLACK, 30, CRIMSON)
-
-        quit_button = Button(
-            color=WHITE,
-            x=630,
-            y=170,
-            width=500,
-            height=50,
-            text="Quit Game"
-        )
-        quit_button.draw(screen, BLACK, 30, CRIMSON)
-
-        play_music_button = Button(
-            color=WHITE,
-            x=630,
-            y=370,
-            width=500,
-            height=50,
-            text="Play music"
-        )
-        play_music_button.draw(screen, BLACK, 30, CRIMSON)
+        game_button.draw(screen)
+        options_button.draw(screen)
+        settings_button.draw(screen)
+        quit_button.draw(screen)
+        play_music_button.draw(screen)
 
         events = p.event.get()
         for event in events:
@@ -148,10 +166,21 @@ def mainMenu(screen):
             if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
                 if event.button == 1: # Checks if button has been clicked
                     mouse_click = True    
+            if event.type == MOUSEMOTION:
+                if game_button.mouse_collide():
+                    game_button.color = RED
+                else:
+                    game_button.color = WHITE
+                
+                if play_music_button.mouse_collide():
+                    play_music_button.color = RED
+                else:
+                    play_music_button.color = WHITE
+
 
 
         if game_button.mouse_collide() and mouse_click == True:
-            game()
+            game()            
 
         if options_button.mouse_collide() and mouse_click == True:
             options(screen)
@@ -461,60 +490,79 @@ def game():
 
 def play_music():
     run = True
-    while run:
-        screen.fill(BROWN)
-        mouse_click = False
 
-        return_button = Button(
+    return_button = Button(
             color=BLACK,
             x=30,
             y=170,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Return to main menu"
         )
-        return_button.draw(screen, WHITE, 30, CRIMSON)
 
-        start_music_button = Button(
+    start_music_button = Button(
             color=WHITE,
             x=30,
             y=370,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Play music"
-        )
-        start_music_button.draw(screen, BLACK, 30, CRIMSON)
+        )       
 
-        stop_music_button = Button(
+    stop_music_button = Button(
             color=WHITE,
             x=30,
             y=570,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Stop music"
-        )
-        stop_music_button.draw(screen, BLACK, 30, CRIMSON)
+        )         
 
-        pause_music_button = Button(
+    pause_music_button = Button(
             color=WHITE,
             x=630,
             y=170,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Pause music"
         )
-        pause_music_button.draw(screen, BLACK, 30, CRIMSON)
 
-
-        resume_music_button = Button(
+    resume_music_button = Button(
             color=WHITE,
             x=630,
             y=370,
             width=500,
             height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,             
             text="Resume music"
-        )
-        resume_music_button.draw(screen, BLACK, 30, CRIMSON)
+        )        
+
+
+    while run:
+        screen.fill(BROWN)
+        mouse_click = False
+
+
+        return_button.draw(screen)
+        start_music_button.draw(screen)
+        stop_music_button.draw(screen)
+        pause_music_button.draw(screen)
+        resume_music_button.draw(screen)
+
 
         events = p.event.get()
         for event in events:
