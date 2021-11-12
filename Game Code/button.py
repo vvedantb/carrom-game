@@ -35,3 +35,6 @@ class Button:
             if my > self.y and my < self.y + self.height:
                 return True
         return False
+
+    def change_color(self):
+        pass # TODO: Add code to change color when the button has been pressed for the play music function

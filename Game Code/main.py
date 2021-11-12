@@ -8,6 +8,7 @@ import math # For collision function
 from pygame.locals import * # Imports constants that are used by the Pygame module
 from striker import Striker
 from piece import Piece
+from button import Button
 import math
 
 #from start_menu import *
@@ -80,12 +81,6 @@ def mainMenu():
         mouse_click = False
         drawText("Main Menu", font, WHITE, screen, 20, 20)
 
-        button_height = screen.get_height()/20
-        button_width = screen.get_width()/10
-
-        text_width = screen.get_width()/10
-        text_height = screen.get_height()/6
-
         game_button = Button(
             color=WHITE,
             x=30,
@@ -150,7 +145,7 @@ def mainMenu():
             quit_game()
 
         if play_music_button.mouse_collide() and mouse_click == True:
-            play_music(button_width, button_height, text_height, text_width)
+            play_music()
 
         p.display.flip() # Updates display
         clock.tick(FPS) 
@@ -333,21 +328,63 @@ def game():
         clock.tick(FPS)
 
 
-
-
-
-
-def play_music(button_width, button_height, text_height, text_width):
+def play_music():
     run = True
     while run:
-        drawText('Press "ESC" to exit music', font, BLACK, screen, 500, 400)
-        drawText('Press "Y" to start music', font, BLACK, screen, 500, 500)
-        drawText('Press "N" to stop music', font, BLACK, screen, 500, 600)
-        drawText('Press "P" to pause music', font, BLACK, screen, 500, 700)
-        drawText('Press "O" to resume music', font, BLACK, screen, 500, 800)
+        screen.fill(BROWN)
+        mouse_click = False
 
-        music_button = p.Rect(button_width-20, (5*WIDTH/10)+5, button_width+50, button_height)
-        
+        return_button = Button(
+            color=WHITE,
+            x=30,
+            y=170,
+            width=500,
+            height=50,
+            text="Click to return to main menu"
+        )
+        return_button.draw(screen, BLACK, 30, CRIMSON)
+
+        start_music_button = Button(
+            color=WHITE,
+            x=30,
+            y=370,
+            width=500,
+            height=50,
+            text="Play music"
+        )
+        start_music_button.draw(screen, BLACK, 30, CRIMSON)
+
+        stop_music_button = Button(
+            color=WHITE,
+            x=30,
+            y=570,
+            width=500,
+            height=50,
+            text="Stop music"
+        )
+        stop_music_button.draw(screen, BLACK, 30, CRIMSON)
+
+        pause_music_button = Button(
+            color=WHITE,
+            x=630,
+            y=170,
+            width=500,
+            height=50,
+            text="Pause music"
+        )
+        pause_music_button.draw(screen, BLACK, 30, CRIMSON)
+
+
+        resume_music_button = Button(
+            color=WHITE,
+            x=630,
+            y=370,
+            width=500,
+            height=50,
+            text="Resume music"
+        )
+        resume_music_button.draw(screen, BLACK, 30, CRIMSON)
+
         events = p.event.get()
         for event in events:
             if event.type == QUIT:
@@ -356,31 +393,73 @@ def play_music(button_width, button_height, text_height, text_width):
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
-                if event.key == K_y:
-                    p.mixer.music.load("Game Code/music.wav") # Loads the music file
-                    p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
-                    p.mixer.music.set_volume(0.25) # Sets the music volume
-                    
-                    p.draw.rect(screen, GREEN, music_button)
-                    drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
-                if event.key == K_n:
-                    p.mixer.music.stop()
-                    p.draw.rect(screen, RED, music_button)
-                    drawText("Stopped", font, WHITE, screen, text_height, 5.1*text_width)
-                if event.key == K_p:
-                    p.mixer.music.pause()
-                    p.draw.rect(screen, BLUE, music_button)
-                    drawText("Paused", font, WHITE, screen, text_height, 5.1*text_width)
-                if event.key == K_o:
-                    p.mixer.music.unpause()
-                    p.draw.rect(screen, GREEN, music_button)
-                    drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_click = True
+
+        if return_button.mouse_collide() and mouse_click == True:
+            run = False
+
+        if start_music_button.mouse_collide() and mouse_click == True:
+            p.mixer.music.load("Game Code/music.wav") # Loads the music file
+            p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
+            p.mixer.music.set_volume(0.25) # Sets the music volume
+
+        if stop_music_button.mouse_collide() and mouse_click == True:
+            p.mixer.music.stop()
+
+        if pause_music_button.mouse_collide() and mouse_click == True:
+            p.mixer.music.pause()
+
+        if resume_music_button.mouse_collide() and mouse_click == True:
+            p.mixer.music.unpause()
 
         p.display.update()
-        clock.tick(FPS)    
+        clock.tick(FPS)
 
 
-from button import Button
+# def play_music(button_width, button_height, text_height, text_width):
+#     run = True
+#     while run:
+#         drawText('Press "ESC" to exit music', font, BLACK, screen, 500, 400)
+#         drawText('Press "Y" to start music', font, BLACK, screen, 500, 500)
+#         drawText('Press "N" to stop music', font, BLACK, screen, 500, 600)
+#         drawText('Press "P" to pause music', font, BLACK, screen, 500, 700)
+#         drawText('Press "O" to resume music', font, BLACK, screen, 500, 800)
+
+#         music_button = p.Rect(button_width-20, (5*WIDTH/10)+5, button_width+50, button_height)
+        
+#         events = p.event.get()
+#         for event in events:
+#             if event.type == QUIT:
+#                 p.quit()
+#                 sys.exit()
+#             if event.type == KEYDOWN:
+#                 if event.key == K_ESCAPE:
+#                     run = False
+#                 if event.key == K_y:
+#                     p.mixer.music.load("Game Code/music.wav") # Loads the music file
+#                     p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
+#                     p.mixer.music.set_volume(0.25) # Sets the music volume
+                    
+#                     p.draw.rect(screen, GREEN, music_button)
+#                     drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
+#                 if event.key == K_n:
+#                     p.mixer.music.stop()
+#                     p.draw.rect(screen, RED, music_button)
+#                     drawText("Stopped", font, WHITE, screen, text_height, 5.1*text_width)
+#                 if event.key == K_p:
+#                     p.mixer.music.pause()
+#                     p.draw.rect(screen, BLUE, music_button)
+#                     drawText("Paused", font, WHITE, screen, text_height, 5.1*text_width)
+#                 if event.key == K_o:
+#                     p.mixer.music.unpause()
+#                     p.draw.rect(screen, GREEN, music_button)
+#                     drawText("Playing Music", font, WHITE, screen, text_height, 5.1*text_width)
+
+#         p.display.update()
+#         clock.tick(FPS)    
+
 
 def options():
     run = True
@@ -527,10 +606,6 @@ def quit_game():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
-            if event.type == KEYDOWN:
-                if event.key == K_q:
-                    run = False
-                    p.quit()
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     mouse_click = True
