@@ -62,6 +62,19 @@ def collide(p1, p2):
     pass
 
 
+def event_manager():
+    events = p.event.get()
+    for event in events:
+        if event.type == QUIT:
+            p.quit()
+            sys.exit()
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                run = False
+        if event.type == MOUSEBUTTONDOWN:
+            if event.button == 1:
+                mouse_click = True    
+
 
 def drawText(text, font, color, surface, x, y): # Writes text onto the screen of the program
     textobj = font.render(text, 1, color)
@@ -127,10 +140,6 @@ def mainMenu():
             if event.type == QUIT: # Checks if the cross (top right button) has been pressed
                 p.quit() # Program ends
                 sys.exit()
-            if event.type == KEYDOWN: # Checks if a key has been pressed
-                if event.key == K_ESCAPE: # Checks if escape key has been pressed
-                    p.quit() # Programs ends
-                    sys.exit()
             if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
                 if event.button == 1: # Checks if button has been clicked
                     mouse_click = True
@@ -335,14 +344,14 @@ def play_music():
         mouse_click = False
 
         return_button = Button(
-            color=WHITE,
+            color=BLACK,
             x=30,
             y=170,
             width=500,
             height=50,
-            text="Click to return to main menu"
+            text="Return to main menu"
         )
-        return_button.draw(screen, BLACK, 30, CRIMSON)
+        return_button.draw(screen, WHITE, 30, CRIMSON)
 
         start_music_button = Button(
             color=WHITE,
@@ -425,6 +434,17 @@ def options():
         mouse_click = False
         drawText('Options', font, WHITE, screen, 20, 20)
         
+        return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=500,
+            height=50,
+            text="Return to main menu"
+        )
+
+        return_button.draw(screen, WHITE, 30, CRIMSON)
+
         test_button = Button(
             color=WHITE,
             x=30,
@@ -467,8 +487,14 @@ def options():
             print("This also works!")
             # TODO: Put pieces colour as whatever specified
 
+        if return_button.mouse_collide() and mouse_click == True:
+            mainMenu()
+
         p.display.update()
         clock.tick(FPS)
+
+
+
 
 
 def settings():
@@ -480,6 +506,17 @@ def settings():
         mouse_click = False
 
         drawText('Settings', font, WHITE, screen, 20, 20)
+
+        return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=500,
+            height=50,
+            text="Return to main menu"
+        )
+
+        return_button.draw(screen, WHITE, 30, CRIMSON)
 
         x_sensitivity_button = Button(
             color=WHITE,
@@ -501,17 +538,7 @@ def settings():
         )
         y_sensitivity_button.draw(screen, text_color=BLACK, text_size=30, outline=CRIMSON)
 
-        events = p.event.get()
-        for event in events:
-            if event.type == QUIT:
-                p.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    run = False
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    mouse_click = True
+        event_manager()
         
         if x_sensitivity_button.mouse_collide() and mouse_click == True:
             print("Omg! It works!")
@@ -521,8 +548,14 @@ def settings():
             print("Omgggg! It works!")
             # TODO: Change x-sensitivity
 
+        if return_button.mouse_collide() and mouse_click == True:
+            mainMenu()        
+        
         p.display.update()
         clock.tick(FPS)
+
+
+
 
 
 
@@ -533,6 +566,17 @@ def quit_game():
         mouse_click = False
 
         drawText('Are you sure you would like to quit?', font, WHITE, screen, 20, 220)
+      
+
+        return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=500,
+            height=50,
+            text="Return to main menu"
+        )
+        return_button.draw(screen, WHITE, 30, CRIMSON)
 
         confirm_quit_button = Button(
             color=WHITE,
@@ -544,15 +588,7 @@ def quit_game():
         )
         confirm_quit_button.draw(screen, BLACK, 30, CRIMSON)
 
-        return_button = Button(
-            color=WHITE,
-            x=30,
-            y=370,
-            width=500,
-            height=50,
-            text="Click to return to main menu"
-        )
-        return_button.draw(screen, BLACK, 30, CRIMSON)
+
 
         
         events = p.event.get()
@@ -567,12 +603,12 @@ def quit_game():
                 if event.button == 1:
                     mouse_click = True
 
+        if return_button.mouse_collide() and mouse_click == True:
+            run = False
+
         if confirm_quit_button.mouse_collide() and mouse_click == True:
             run = False
             p.quit()
-        
-        if return_button.mouse_collide() and mouse_click == True:
-            run = False
 
         p.display.update()
         clock.tick(FPS)
