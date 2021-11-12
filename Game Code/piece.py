@@ -12,24 +12,26 @@ class Piece:
         self.size = size
         self.mass = mass
         self.state = state
-        if self.state == "queen":
-            self.color = (153, 0, 102)
-        elif self.state == "brown":
-            self.color = (101, 67, 33)
-        elif self.state == "black":
-            self.color = (0, 0, 0)
+        self.state = state
         self.color = color
 
         self.speed = 0
         self.angle = 0
 
     def draw(self):
-        p.draw.circle(
-            screen, 
-            self.color, 
-            int(self.x), int(self.y), 
-            self.size
-        )
+        if self.state == "queen":
+            self.color = (153, 0, 102)
+        elif self.state == "brown":
+            self.color = (101, 67, 33)
+        elif self.state == "black":
+            self.color = (0, 0, 0)
+        p.draw.circle(screen, self.color, (int(self.x), int(self.y)), self.size)
+
+    def get_width(self):
+        pass
+
+    def get_height(self):
+        pass
 
     def show(self, x, y):
         pass

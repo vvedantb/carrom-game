@@ -214,13 +214,61 @@ def mainMenu(screen):
 
 
 def draw_pieces():
-    piece1 = Piece(
-        x=( 800 ), 
-        y=( 1000 ), 
+    queen_piece = Piece(
+        x=WIDTH/2, 
+        y=HEIGHT/2, 
         size=15, 
         mass=1, 
-        state="queen")
-    piece1.draw()
+        state="queen"
+    )
+    queen_piece.draw()
+
+    brown_piece1 = Piece(
+        x=(WIDTH/2)+30, 
+        y=(HEIGHT/2)-30, 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece1.draw()
+
+    brown_piece2 = Piece(
+        x=(WIDTH/2)-30, 
+        y=(HEIGHT/2)+30, 
+        size=15, 
+        mass=1, 
+        state="brown"
+    )
+    brown_piece2.draw()  
+
+    black_piece1 = Piece(
+        x=(WIDTH/2), 
+        y=(HEIGHT/2)-30, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece1.draw()   
+
+    black_piece2 = Piece(
+        x=(WIDTH/2)+30, 
+        y=(HEIGHT/2)+15, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece2.draw()         
+
+    black_piece3 = Piece(
+        x=(WIDTH/2)-30, 
+        y=(HEIGHT/2)-30, 
+        size=15, 
+        mass=1, 
+        state="black"
+    )
+    black_piece3.draw()      
+
+    
 
     #piece2 = Piece(DARK_GREY, ( WIDTH/2 ), ( 100000/HEIGHT ), 15, 1, "normal")
     #piece2.draw()
