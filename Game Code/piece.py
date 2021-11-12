@@ -2,6 +2,7 @@ import pygame as p #Allows p to be referred as "p" at any point in the program
 p.font.init() #Initialises the font module
 
 WIDTH, HEIGHT = 1600, 900 
+WHITE = (255, 255, 255)
 screen = p.display.set_mode((WIDTH, HEIGHT), p.RESIZABLE) # Sets the display resolution
 clock = p.time.Clock()
 
@@ -27,9 +28,9 @@ class Piece:
         elif self.state == "black":
             self.color = (72, 73, 76)
         
-        p.draw.circle(screen, (255,255,255), (int(self.x), int(self.y)), 12, 0)
-        
         p.draw.circle(screen, self.color, (int(self.x), int(self.y)), self.size)
+
+        p.draw.circle(screen, WHITE, (int(self.x), int(self.y)), self.size-2, 2)
 
     def get_width(self):
         pass
