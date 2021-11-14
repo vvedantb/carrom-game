@@ -248,6 +248,19 @@ def draw_striker():
     striker.draw()
 
 def game(screen):    
+
+    return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=200,
+            height=50,
+            text_color=WHITE,
+            text_size=30,
+            outline=CRIMSON,                        
+            text="Return"
+        )    
+
     run = True
     while run:
         screen.fill(BROWN)
@@ -257,6 +270,7 @@ def game(screen):
 
         drawText("Play Game", font, BLACK, screen, 20, 20) # Writes text onto the screen 
 
+        return_button.draw(screen)
 
         events = p.event.get()
         for event in events:
@@ -266,10 +280,17 @@ def game(screen):
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_click = True                    
             # if event.type == KEYDOWN:
             #     if event.key == K_SPACE:
             #         striker_shot()
 
+
+        if return_button.mouse_collide() and mouse_click == True:
+            run = False        
+        
         WIDTH = screen.get_width()
         HEIGHT = screen.get_height()
 

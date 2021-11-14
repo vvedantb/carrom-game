@@ -52,5 +52,43 @@ font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
 
 
-def instructions():
-    pass
+def instructions(screen):
+    
+    return_button = Button(
+            color=BLACK,
+            x=30,
+            y=70,
+            width=500,
+            height=50,
+            text_color=WHITE,
+            text_size=30,
+            outline=CRIMSON,                        
+            text="Return to main menu"
+        )    
+    
+    
+    run = True
+    while run:
+        screen.fill(BROWN)
+        mouse_click = False
+
+        return_button.draw(screen)
+
+        events = p.event.get()
+        for event in events:
+            if event.type == QUIT:
+                p.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    run = False
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_click = True
+
+        if return_button.mouse_collide() and mouse_click == True:
+            run = False
+
+
+        p.display.update()
+        clock.tick(FPS)        
