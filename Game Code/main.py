@@ -10,6 +10,7 @@ from striker import Striker
 from piece import Piece
 from button import Button
 import math
+from music import play_music
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
 p.init() # Initialises all imported Pygame modules 
@@ -132,7 +133,7 @@ def mainMenu(screen):
             text="Quit Game"
         )
 
-    play_music_button = Button(
+    music_button = Button(
             color=WHITE,
             x=630,
             y=370,
@@ -142,7 +143,31 @@ def mainMenu(screen):
             text_size=30,
             outline=CRIMSON,            
             text="Play music"
-        )           
+        )       
+
+    tutorial_button = Button(
+            color=WHITE,
+            x=630,
+            y=570,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,            
+            text="How to play"        
+    )    
+
+    instructions_button = Button(
+            color=WHITE,
+            x=630,
+            y=770,
+            width=500,
+            height=50,
+            text_color=BLACK,
+            text_size=30,
+            outline=CRIMSON,            
+            text="Instructions"        
+    )    
 
 
     while True:
@@ -155,7 +180,9 @@ def mainMenu(screen):
         options_button.draw(screen)
         settings_button.draw(screen)
         quit_button.draw(screen)
-        play_music_button.draw(screen)
+        music_button.draw(screen)
+        tutorial_button.draw(screen)
+        instructions_button.draw(screen)
 
         events = p.event.get()
         for event in events:
@@ -185,11 +212,20 @@ def mainMenu(screen):
                     quit_button.color = RED
                 else:
                     quit_button.color = WHITE                                      
-
-                if play_music_button.mouse_collide():
-                    play_music_button.color = RED
+                if music_button.mouse_collide():
+                    music_button.color = RED
                 else:
-                    play_music_button.color = WHITE
+                    music_button.color = WHITE
+
+                if tutorial_button.mouse_collide():
+                    tutorial_button.color = RED
+                else:
+                    tutorial_button.color = WHITE
+
+                if instructions_button.mouse_collide():
+                    instructions_button.color = RED
+                else:
+                    instructions_button.color = WHITE
 
                 
 
@@ -207,8 +243,15 @@ def mainMenu(screen):
         if quit_button.mouse_collide() and mouse_click == True:
             quit_game()
 
-        if play_music_button.mouse_collide() and mouse_click == True:
-            play_music()
+        if music_button.mouse_collide() and mouse_click == True:
+            play_music(screen)
+
+        if tutorial_button.mouse_collide() and mouse_click == True:
+            tutorial()
+
+        if instructions_button.mouse_collide() and mouse_click == True:
+            instructions()            
+        
 
         p.display.flip() # Updates display
         clock.tick(FPS) 
@@ -442,81 +485,16 @@ def game():
 
 
 
-def play_music():
+
+
+def tutorial():
     run = True
-
-    return_button = Button(
-            color=BLACK,
-            x=30,
-            y=170,
-            width=500,
-            height=50,
-            text_color=BLACK,
-            text_size=30,
-            outline=CRIMSON,             
-            text="Return to main menu"
-        )
-
-    start_music_button = Button(
-            color=WHITE,
-            x=30,
-            y=370,
-            width=500,
-            height=50,
-            text_color=BLACK,
-            text_size=30,
-            outline=CRIMSON,             
-            text="Play music"
-        )       
-
-    stop_music_button = Button(
-            color=WHITE,
-            x=30,
-            y=570,
-            width=500,
-            height=50,
-            text_color=BLACK,
-            text_size=30,
-            outline=CRIMSON,             
-            text="Stop music"
-        )         
-
-    pause_music_button = Button(
-            color=WHITE,
-            x=630,
-            y=170,
-            width=500,
-            height=50,
-            text_color=BLACK,
-            text_size=30,
-            outline=CRIMSON,             
-            text="Pause music"
-        )
-
-    resume_music_button = Button(
-            color=WHITE,
-            x=630,
-            y=370,
-            width=500,
-            height=50,
-            text_color=BLACK,
-            text_size=30,
-            outline=CRIMSON,             
-            text="Resume music"
-        )        
-
 
     while run:
         screen.fill(BROWN)
         mouse_click = False
 
-
-        return_button.draw(screen)
-        start_music_button.draw(screen)
-        stop_music_button.draw(screen)
-        pause_music_button.draw(screen)
-        resume_music_button.draw(screen)
-
+        drawText("How to play..", font, WHITE, screen, x=WIDTH/4, y=HEIGHT/4)
 
         events = p.event.get()
         for event in events:
@@ -528,29 +506,12 @@ def play_music():
                     run = False
             if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
                 if event.button == 1: # Checks if button has been clicked
-                    mouse_click = True    
+                    mouse_click = True          
 
 
-        if return_button.mouse_collide() and mouse_click == True:
-            run = False
 
-        if start_music_button.mouse_collide() and mouse_click == True:
-            p.mixer.music.load("Game Code/music.wav") # Loads the music file
-            p.mixer.music.play(-1) # Plays the music, and sets it to loop through the argument -1
-            p.mixer.music.set_volume(0.25) # Sets the music volume
-
-        if stop_music_button.mouse_collide() and mouse_click == True:
-            p.mixer.music.stop()
-
-        if pause_music_button.mouse_collide() and mouse_click == True:
-            p.mixer.music.pause()
-
-        if resume_music_button.mouse_collide() and mouse_click == True:
-            p.mixer.music.unpause()
-
-        p.display.update()
-        clock.tick(FPS)
-
+def instructions():
+    pass
 
 
 
@@ -607,7 +568,7 @@ def resolution_settings(screen):
 
     back_button = Button(
             color=BLACK,
-            x=30,
+            x=100,
             y=970,
             width=500,
             height=50,
@@ -640,23 +601,23 @@ def resolution_settings(screen):
                 if event.button == 1:
                     mouse_click = True
         
-        if res1_button.mouse_collide() and mouse_click == True:
-            WIDTH, HEIGHT = 1280, 720             
-            screen = p.display.set_mode((WIDTH, HEIGHT))
+        # if res1_button.mouse_collide() and mouse_click == True:
+        #     WIDTH, HEIGHT = 1280, 720             
+        #     screen = p.display.set_mode((WIDTH, HEIGHT))
 
-        if res2_button.mouse_collide() and mouse_click == True:
-            WIDTH, HEIGHT = 1600, 900
-            screen = p.display.set_mode((WIDTH, HEIGHT))
+        # if res2_button.mouse_collide() and mouse_click == True:
+        #     WIDTH, HEIGHT = 1600, 900
+        #     screen = p.display.set_mode((WIDTH, HEIGHT))
 
-        if res3_button.mouse_collide() and mouse_click == True:
-            WIDTH, HEIGHT = 1920, 1080
-            screen = p.display.set_mode((WIDTH, HEIGHT))
+        # if res3_button.mouse_collide() and mouse_click == True:
+        #     WIDTH, HEIGHT = 1920, 1080
+        #     screen = p.display.set_mode((WIDTH, HEIGHT))
 
-        if res4_button.mouse_collide() and mouse_click == True:
-            pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        # if res4_button.mouse_collide() and mouse_click == True:
+        #     pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-        if back_button.mouse_collide() and mouse_click == True:
-            run = False
+        # if back_button.mouse_collide() and mouse_click == True:
+        #     run = False
 
 
 
