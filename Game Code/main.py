@@ -6,7 +6,7 @@ import sys #
 import pyautogui # Custom cursor speed
 import math # For collision function
 from pygame.locals import * # Imports constants that are used by the Pygame module
-from striker import Striker
+#from striker import Striker
 from piece import Piece
 from button import Button
 import math
@@ -34,6 +34,10 @@ BLUE = (0, 0, 255)
 DARK_GREY = (125, 125, 125)
 LIGHT_BROWN = (191, 134, 0)
 
+
+FPS = 60 # Sets the refresh rate
+mouse_click = False # If a click has been made 
+
 Board = p.image.load("Game Code/board.png")
 
 WIDTH, HEIGHT = 1600, 900
@@ -46,12 +50,9 @@ font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
 BLACK_PIECE = p.image.load("Game Code/Assets/black-piece.png")
 #BROWN_PIECE = 
-PLAYER_STRIKER = p.draw.circle(screen, BLUE, (0,0), 2)
-ENEMY_STRIKER = p.draw.circle(screen, RED, (0,0), 2)
 
-FPS = 60 # Sets the refresh rate, i.e. 60 times a second
 
-mouse_click = False # If a click has been made by the mouse
+
 
 
 

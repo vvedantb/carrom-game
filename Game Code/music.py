@@ -6,10 +6,12 @@ import sys #
 import pyautogui # Custom cursor speed
 import math # For collision function
 from pygame.locals import * # Imports constants that are used by the Pygame module
-from striker import Striker
 from piece import Piece
 from button import Button
 import math
+clock = p.time.Clock() # Creates a clock object that is used to track amount of time
+FPS = 60 # Sets the refresh rate
+mouse_click = False # If a click has been made
 
 
 YELLOW = (240,230,140)
