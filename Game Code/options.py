@@ -13,7 +13,6 @@ from piece import Piece
 from button import Button
 
 from draw_text import drawText
-from mainmenu import mainMenu
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
 p.init() # Initialises all imported Pygame modules 
@@ -245,7 +244,7 @@ def options(screen):
             # TODO: Put pieces colour as whatever specified
 
         if return_button.mouse_collide() and mouse_click == True:
-            mainMenu(screen)
+            run = False
 
         if resolution_button.mouse_collide() and mouse_click == True:
             resolution_settings(screen)

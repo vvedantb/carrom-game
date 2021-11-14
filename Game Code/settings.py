@@ -12,7 +12,6 @@ from pygame.locals import * # Imports constants that are used by the Pygame modu
 from piece import Piece
 from button import Button
 
-from mainmenu import mainMenu
 from draw_text import drawText
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
@@ -131,7 +130,7 @@ def settings(screen):
             # TODO: Change x-sensitivity
 
         if return_button.mouse_collide() and mouse_click == True:
-            mainMenu(screen)        
+            run = False
         
         p.display.update()
         clock.tick(FPS)

@@ -50,66 +50,26 @@ screen.fill(BROWN)
 p.font.init()
 font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
-BLACK_PIECE = p.image.load("Game Code/Assets/black-piece.png")
-#BROWN_PIECE = 
 
-
-
-def quit_game(screen):
+def tutorial(screen):
     run = True
-
-    return_button = Button(
-            color=BLACK,
-            x=30,
-            y=70,
-            width=500,
-            height=50,
-            text_color=WHITE,
-            text_size=30,
-            outline=CRIMSON,                        
-            text="Return to main menu"
-        )
-
-    confirm_quit_button = Button(
-            color=WHITE,
-            x=30,
-            y=170,
-            width=500,
-            height=50,
-            text_color=BLACK,
-            text_size=30,
-            outline=CRIMSON,                        
-            text="Click to quit"
-        )        
 
     while run:
         screen.fill(BROWN)
         mouse_click = False
 
-        drawText('Are you sure you would like to quit?', font, WHITE, screen, 20, 220)
-      
-        return_button.draw(screen)
-        confirm_quit_button.draw(screen)
+        drawText("How to play..", font, WHITE, screen, x=WIDTH/4, y=HEIGHT/4)
 
-        
         events = p.event.get()
         for event in events:
-            if event.type == QUIT:
-                p.quit()
+            if event.type == QUIT: # Checks if the cross (top right button) has been pressed
+                p.quit() # Program ends
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    mouse_click = True
+            if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
+                if event.button == 1: # Checks if button has been clicked
+                    mouse_click = True          
 
-        if return_button.mouse_collide() and mouse_click == True:
-            run = False
 
-        if confirm_quit_button.mouse_collide() and mouse_click == True:
-            run = False
-            p.quit()
-
-        p.display.update()
-        clock.tick(FPS)
