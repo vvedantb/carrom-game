@@ -25,6 +25,7 @@ BLUE = (0, 0, 255)
 DARK_GREY = (125, 125, 125)
 LIGHT_BROWN = (191, 134, 0)
 
+
 def play_music(screen):
     run = True
 

@@ -12,13 +12,8 @@ from pygame.locals import * # Imports constants that are used by the Pygame modu
 from piece import Piece
 from button import Button
 
-from draw_text import drawText
 
-from music import play_music
-from options import options
-from quitt import quit_game
-from settings import settings
-from game import game
+from draw_text import drawText
 
 clock = p.time.Clock() # Creates a clock object that is used to track amount of time
 p.init() # Initialises all imported Pygame modules 
@@ -55,29 +50,6 @@ screen.fill(BROWN)
 
 p.font.init()
 font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
-
-BLACK_PIECE = p.image.load("Game Code/Assets/black-piece.png")
-#BROWN_PIECE = 
-
-
-
-
-
-
-
-def event_manager():
-    events = p.event.get()
-    for event in events:
-        if event.type == QUIT: # Checks if the cross (top right button) has been pressed
-            p.quit() # Program ends
-            sys.exit()
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
-                run = False
-        if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
-            if event.button == 1: # Checks if button has been clicked
-                mouse_click = True    
-
 
 
 
@@ -254,54 +226,3 @@ def mainMenu(screen):
 
         p.display.flip() # Updates display
         clock.tick(FPS) 
-
-
-
-
-
-
-def tutorial():
-    run = True
-
-    while run:
-        screen.fill(BROWN)
-        mouse_click = False
-
-        drawText("How to play..", font, WHITE, screen, x=WIDTH/4, y=HEIGHT/4)
-
-        events = p.event.get()
-        for event in events:
-            if event.type == QUIT: # Checks if the cross (top right button) has been pressed
-                p.quit() # Program ends
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    run = False
-            if event.type == MOUSEBUTTONDOWN: # Checks if mouse button has been pressed
-                if event.button == 1: # Checks if button has been clicked
-                    mouse_click = True          
-
-
-
-def instructions():
-    pass
-
-
-
-
-
-
-
-
-mainMenu(screen)
-
-
-        
-
-
-
-
-
-    
-    
-
