@@ -50,191 +50,87 @@ screen.fill(BROWN)
 p.font.init()
 font = p.font.SysFont('Arial Bold', 40) # Sets the font used within the program
 
-BLACK_PIECE = p.image.load("Game Code/Assets/black-piece.png")
-#BROWN_PIECE = 
+
 
 
 # Inner layer
 
-queen_piece = Piece( # Middle piece
-    x=WIDTH/2, 
-    y=HEIGHT/2, 
-    size=15, 
-    mass=1, 
-    state="queen"
-)
+queen_piece = Piece(x=WIDTH/2, y=HEIGHT/2, size=15, mass=1, state="queen")  # Middle piece
 
-brown_piece1 = Piece( # Top left piece
-    x=(WIDTH/2)-30, 
-    y=(HEIGHT/2)-15, 
-    size=15, 
-    mass=1, 
-    state="brown"
-)
+brown_piece1 = Piece(x=(WIDTH/2)-30, y=(HEIGHT/2)-15, size=15, mass=1, state="brown")  # Top left piece
 
-brown_piece2 = Piece( # Botton piece
-    x=(WIDTH/2), 
-    y=(HEIGHT/2)+30, 
-    size=15, 
-    mass=1, 
-    state="brown"
-)
+brown_piece2 = Piece(x=(WIDTH/2), y=(HEIGHT/2)+30, size=15, mass=1, state="brown")  # Botton piece
 
-brown_piece3 = Piece( # Top right piece
-    x=(WIDTH/2)+30, 
-    y=(HEIGHT/2)-15, 
-    size=15, 
-    mass=1, 
-    state="brown"
-)
+brown_piece3 = Piece(x=(WIDTH/2)+30, y=(HEIGHT/2)-15, size=15, mass=1, state="brown")  # Top right piece
 
 # BROWN OUTER LAYER
 
-brown_piece4 = Piece( # Left piece
-    x=(WIDTH/2)-60, 
-    y=(HEIGHT/2), 
-    size=15, 
-    mass=1, 
-    state="brown"
-)
+brown_piece4 = Piece(x=(WIDTH/2)-60, y=(HEIGHT/2), size=15, mass=1, state="brown") # Left piece
 
-brown_piece5 = Piece( # Right piece
-    x=(WIDTH/2)+60, 
-    y=(HEIGHT/2), 
-    size=15, 
-    mass=1, 
-    state="brown"
-)
+brown_piece5 = Piece(x=(WIDTH/2)+60, y=(HEIGHT/2), size=15, mass=1, state="brown") # Right piece
     
-brown_piece6 = Piece( # Top left piece
-    x=(WIDTH/2)-30, 
-    y=(HEIGHT/2)-45, 
-    size=15, 
-    mass=1, 
-    state="brown"
-)  
+brown_piece6 = Piece(x=(WIDTH/2)-30, y=(HEIGHT/2)-45, size=15, mass=1, state="brown") # Top left piece  
 
-brown_piece7 = Piece( # Top right piece
-    x=(WIDTH/2)+30, 
-    y=(HEIGHT/2)-45, 
-    size=15, 
-    mass=1, 
-    state="brown"
-)       
+brown_piece7 = Piece(x=(WIDTH/2)+30, y=(HEIGHT/2)-45, size=15, mass=1, state="brown") # Top right piece       
 
-brown_piece8 = Piece( # Bottom left piece
-    x=(WIDTH/2)-30, 
-    y=(HEIGHT/2)+45, 
-    size=15, 
-    mass=1, 
-    state="brown"
-)
+brown_piece8 = Piece(x=(WIDTH/2)-30, y=(HEIGHT/2)+45, size=15, mass=1, state="brown") # Bottom left piece
 
-brown_piece9 = Piece( # Bottom right piece
-    x=(WIDTH/2)+30, 
-    y=(HEIGHT/2)+45, 
-    size=15, 
-    mass=1, 
-    state="brown"
-)
+brown_piece9 = Piece(x=(WIDTH/2)+30, y=(HEIGHT/2)+45, size=15, mass=1, state="brown") # Bottom right piece
 
 # BLACK INNER LAYER
-black_piece1 = Piece( #Top piece
-    x=(WIDTH/2), 
-    y=(HEIGHT/2)-30, 
-    size=15, 
-    mass=1, 
-    state="black"
-)
 
-black_piece2 = Piece( #Bottom right piece
-    x=(WIDTH/2)+30, 
-    y=(HEIGHT/2)+15, 
-    size=15, 
-    mass=1, 
-    state="black"
-)   
+black_piece1 = Piece(x=(WIDTH/2), y=(HEIGHT/2)-30, size=15, mass=1, state="black") #Top piece
 
-black_piece3 = Piece( #Bottom left piece
-    x=(WIDTH/2)-30, 
-    y=(HEIGHT/2)+15, 
-    size=15, 
-    mass=1, 
-    state="black"
-)
+black_piece2 = Piece(x=(WIDTH/2)+30, y=(HEIGHT/2)+15, size=15, mass=1, state="black") #Bottom right piece   
+
+black_piece3 = Piece(x=(WIDTH/2)-30, y=(HEIGHT/2)+15, size=15, mass=1, state="black") #Bottom left piece
 
 # BLACK OUTER LAYER 
 
-black_piece4 = Piece( # Top middle piece
-    x=(WIDTH/2), 
-    y=(HEIGHT/2)-60, 
-    size=15, 
-    mass=1, 
-    state="black"
-)
+black_piece4 = Piece(x=(WIDTH/2), y=(HEIGHT/2)-60, size=15, mass=1, state="black") # Top middle piece
 
-black_piece5 = Piece( # Top left piece
-    x=(WIDTH/2)-60, 
-    y=(HEIGHT/2)-30, 
-    size=15, 
-    mass=1, 
-    state="black"
-)
+black_piece5 = Piece(x=(WIDTH/2)-60, y=(HEIGHT/2)-30, size=15, mass=1, state="black") # Top left piece
 
-black_piece6 = Piece( # Top right piece
-    x=(WIDTH/2)+60, 
-    y=(HEIGHT/2)-30, 
-    size=15, 
-    mass=1, 
-    state="black"
-)   
+black_piece6 = Piece(x=(WIDTH/2)+60, y=(HEIGHT/2)-30, size=15, mass=1, state="black")   # Top right piece
 
-black_piece7 = Piece( # Bottom left piece
-    x=(WIDTH/2)-60, 
-    y=(HEIGHT/2)+30, 
-    size=15, 
-    mass=1, 
-    state="black"
-)
+black_piece7 = Piece(x=(WIDTH/2)-60, y=(HEIGHT/2)+30, size=15, mass=1, state="black") # Bottom left piece
 
-black_piece8 = Piece( # Bottom right piece
-    x=(WIDTH/2)+60, 
-    y=(HEIGHT/2)+30, 
-    size=15, 
-    mass=1, 
-    state="black"
-)
+black_piece8 = Piece(x=(WIDTH/2)+60, y=(HEIGHT/2)+30, size=15, mass=1, state="black")  # Bottom right piece
 
-black_piece9 = Piece( # Bottom middle piece
-    x=(WIDTH/2), 
-    y=(HEIGHT/2)+60, 
-    size=15, 
-    mass=1, 
-    state="black"
-)
+black_piece9 = Piece(x=(WIDTH/2), y=(HEIGHT/2)+60, size=15, mass=1, state="black") # Bottom middle piece
 
-striker = Piece(
-    x=(WIDTH/2), 
-    y=(8*HEIGHT/10), 
-    size=20, 
-    mass=1, 
-    state="striker"
-)
+striker = Piece(x=(WIDTH/2), y=(8*HEIGHT/10), size=20, mass=1, state="striker")
+
+
+pieces = []
+
+queen_piece.append(pieces)
+
+brown_piece1.append(pieces)
+brown_piece2.append(pieces)
+brown_piece3.append(pieces)
+brown_piece4.append(pieces)
+brown_piece5.append(pieces)
+brown_piece6.append(pieces)
+brown_piece7.append(pieces)
+brown_piece8.append(pieces)
+brown_piece9.append(pieces)
+
+black_piece1.append(pieces)
+black_piece2.append(pieces)
+black_piece3.append(pieces)
+black_piece4.append(pieces)
+black_piece5.append(pieces)
+black_piece6.append(pieces)
+black_piece7.append(pieces)
+black_piece8.append(pieces)
+black_piece9.append(pieces)
+
 
 
 def game(screen):    
 
-    return_button = Button(
-            color=BLACK,
-            x=30,
-            y=70,
-            width=200,
-            height=50,
-            text_color=WHITE,
-            text_size=30,
-            outline=CRIMSON,                        
-            text="Return"
-        )    
+    return_button = Button(color=BLACK, x=30, y=70, width=200, height=50, text_color=WHITE, text_size=30, outline=CRIMSON, text="Return")    
 
     run = True
     while run:
@@ -256,14 +152,29 @@ def game(screen):
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     run = False
-                if event.key == K_LEFT:
+
+                if event.key == K_w: # Moves striker right
+                    striker.x += 5                    
+                if event.key == K_s: # Moves striker left
                     striker.x -= 5
-                if event.key == K_RIGHT:
-                    striker.x += 5
+
+                if event.key == K_w: # Increases striking power
+                    if striker.power >= 0:
+                        striker.power += 10
+                if event.key == K_s: # Decreases striking power
+                    if striker.power >= 10:
+                        striker.power -= 10
+                
+                if event.key == K_q: 
+                    print("angle - 10")
+                if event.key == K_e:
+                    print("angle + 10")
+
 
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     mouse_click = True                    
+            
             # if event.type == KEYDOWN:
             #     if event.key == K_SPACE:
             #         striker_shot()
@@ -276,6 +187,7 @@ def game(screen):
         HEIGHT = screen.get_height()
 
         queen_piece.draw()
+        
         brown_piece1.draw()
         brown_piece2.draw()
         brown_piece3.draw()  
@@ -285,6 +197,7 @@ def game(screen):
         brown_piece7.draw()
         brown_piece8.draw()    
         brown_piece9.draw()    
+        
         black_piece1.draw()   
         black_piece2.draw()
         black_piece3.draw()  
@@ -296,6 +209,11 @@ def game(screen):
         black_piece9.draw()  
         
         striker.draw()
+
+
+        # for piece in pieces:
+        #     if 
+
 
         p.display.update()
         clock.tick(FPS)

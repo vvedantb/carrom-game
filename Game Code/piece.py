@@ -1,3 +1,4 @@
+import math
 import pygame as p #Allows p to be referred as "p" at any point in the program
 p.font.init() #Initialises the font module
 
@@ -18,6 +19,7 @@ class Piece:
 
         self.speed = 0
         self.angle = 0
+        self.power = 0
 
     def draw(self):
         outline = 2
@@ -34,7 +36,11 @@ class Piece:
 
         p.draw.circle(screen, WHITE, (int(self.x), int(self.y)), self.size-2, 2)
 
+    def new_xy_pos(self):
+        new_x = self.x + (self)
 
+    def shoot(self):
+        pass
 
     def move(self):
         pass
