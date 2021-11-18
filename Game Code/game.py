@@ -264,6 +264,7 @@ def game(screen):
     run = True
     while run:
         screen.fill(BROWN)
+        mouse_click = False
         BOARD_WIDTH, BOARD_HEIGHT = 900, 900
         BG = p.transform.scale(p.image.load("Game Code/board.png"), ((int(screen.get_width()*0.5625)), screen.get_height())) # TODO: Change this line
         screen.blit(BG, (int(screen.get_width()/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
@@ -299,5 +300,3 @@ def game(screen):
 
         p.display.update()
         clock.tick(FPS)
-
-
