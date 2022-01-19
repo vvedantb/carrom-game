@@ -155,9 +155,16 @@ def game(screen):
                     run = False
 
                 if event.key == K_e: # Moves striker right
-                    striker.x += 5                    
+                    mX, mY = p.mouse.get_pos()
+                    if mX > 90:
+                        mX = 90
+                    else:
+                        striker.x += 5
                 if event.key == K_q: # Moves striker left
-                    striker.x -= 5
+                    if mX < 50:
+                        mX = 50
+                    else:
+                        striker.x -= 5
 
                 if event.key == K_w: # Increases striking power
                     if striker.power >= 0:

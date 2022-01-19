@@ -49,5 +49,5 @@ class Piece:
         pass
 
     def shoot_striker(self):
-        
-        pass
+        if self.state == "striker":
+            
