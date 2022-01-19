@@ -242,10 +242,6 @@ def mainMenu(screen):
         clock.tick(FPS) 
 
 
-
-
-
-
 mainMenu(screen)
 
 

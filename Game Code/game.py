@@ -104,27 +104,28 @@ striker = Piece(x=(WIDTH/2), y=(8*HEIGHT/10), size=20, mass=1, state="striker")
 
 pieces = []
 
-queen_piece.append(pieces)
+pieces.append(queen_piece)
 
-brown_piece1.append(pieces)
-brown_piece2.append(pieces)
-brown_piece3.append(pieces)
-brown_piece4.append(pieces)
-brown_piece5.append(pieces)
-brown_piece6.append(pieces)
-brown_piece7.append(pieces)
-brown_piece8.append(pieces)
-brown_piece9.append(pieces)
+pieces.append(brown_piece1)
+pieces.append(brown_piece2)
+pieces.append(brown_piece3)
+pieces.append(brown_piece4)
+pieces.append(brown_piece5)
+pieces.append(brown_piece6)
+pieces.append(brown_piece7)
+pieces.append(brown_piece8)
+pieces.append(brown_piece9)
 
-black_piece1.append(pieces)
-black_piece2.append(pieces)
-black_piece3.append(pieces)
-black_piece4.append(pieces)
-black_piece5.append(pieces)
-black_piece6.append(pieces)
-black_piece7.append(pieces)
-black_piece8.append(pieces)
-black_piece9.append(pieces)
+
+pieces.append(black_piece1)
+pieces.append(black_piece2)
+pieces.append(black_piece3)
+pieces.append(black_piece4)
+pieces.append(black_piece5)
+pieces.append(black_piece6)
+pieces.append(black_piece7)
+pieces.append(black_piece8)
+pieces.append(black_piece9)
 
 
 
