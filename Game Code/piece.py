@@ -47,3 +47,7 @@ class Piece:
 
     def bounce(self):
         pass
+
+    def shoot_striker(self):
+        
+        pass

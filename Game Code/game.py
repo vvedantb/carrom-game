@@ -176,9 +176,9 @@ def game(screen):
                 if event.button == 1:
                     mouse_click = True                    
             
-            # if event.type == KEYDOWN:
-            #     if event.key == K_SPACE:
-            #         striker_shot()
+            if event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    shoot_striker()
 
 
         if return_button.mouse_collide() and mouse_click == True:
