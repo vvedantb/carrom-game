@@ -154,9 +154,9 @@ def game(screen):
                 if event.key == K_ESCAPE:
                     run = False
 
-                if event.key == K_w: # Moves striker right
+                if event.key == K_e: # Moves striker right
                     striker.x += 5                    
-                if event.key == K_s: # Moves striker left
+                if event.key == K_q: # Moves striker left
                     striker.x -= 5
 
                 if event.key == K_w: # Increases striking power
