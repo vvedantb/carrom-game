@@ -50,4 +50,4 @@ class Piece:
 
     def shoot_striker(self):
         if self.state == "striker":
-            
+            pass

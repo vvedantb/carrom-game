@@ -154,15 +154,16 @@ def game(screen):
                 if event.key == K_ESCAPE:
                     run = False
 
+                mX, mY = p.mouse.get_pos()
                 if event.key == K_e: # Moves striker right
-                    mX, mY = p.mouse.get_pos()
-                    if mX > 90:
-                        mX = 90
+                    
+                    if mX > 600:
+                        striker.x = 560
                     else:
                         striker.x += 5
                 if event.key == K_q: # Moves striker left
-                    if mX < 50:
-                        mX = 50
+                    if mX < 500:
+                        striker.x = 600
                     else:
                         striker.x -= 5
 
