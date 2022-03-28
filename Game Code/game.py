@@ -174,6 +174,7 @@ def game(screen):
                     if striker.power >= 10:
                         striker.power -= 10
                 
+
                 if event.key == K_q: 
                     print("angle - 10")
                 if event.key == K_e:
@@ -186,7 +187,7 @@ def game(screen):
             
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    shoot_striker()
+                    striker.shot()
 
 
         if return_button.mouse_collide() and mouse_click == True:
@@ -218,11 +219,6 @@ def game(screen):
         black_piece9.draw()  
         
         striker.draw()
-
-
-        # for piece in pieces:
-        #     if 
-
 
         p.display.update()
         clock.tick(FPS)

@@ -1,3 +1,4 @@
+from time import sleep 
 import math
 import pygame as p #Allows p to be referred as "p" at any point in the program
 p.font.init() #Initialises the font module
@@ -39,8 +40,11 @@ class Piece:
     def new_xy_pos(self):
         new_x = self.x + (self)
 
-    def shoot(self):
-        pass
+    def shot(self):
+        if self.state == "striker":
+            for i in range(0, self.power*5):
+                sleep(0.1)
+                self.y -= 1
 
     def move(self):
         pass
