@@ -45,13 +45,3 @@ class Piece:
             for i in range(0, self.power*5):
                 sleep(0.1)
                 self.y -= 1
-
-    def move(self):
-        pass
-
-    def bounce(self):
-        pass
-
-    def shoot_striker(self):
-        if self.state == "striker":
-            pass

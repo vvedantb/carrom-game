@@ -99,7 +99,7 @@ black_piece8 = Piece(x=(WIDTH/2)+60, y=(HEIGHT/2)+30, size=15, mass=1, state="bl
 
 black_piece9 = Piece(x=(WIDTH/2), y=(HEIGHT/2)+60, size=15, mass=1, state="black") # Bottom middle piece
 
-striker = Piece(x=(WIDTH/2), y=(8*HEIGHT/10), size=20, mass=1, state="striker")
+striker = Piece(x=(WIDTH/2), y=(8*HEIGHT/10), size=20, mass=1, state="striker")  # striker piece
 
 
 pieces = []
@@ -131,39 +131,60 @@ pieces.append(black_piece9)
 
 def game(screen):    
 
-    return_button = Button(color=BLACK, x=30, y=70, width=200, height=50, text_color=WHITE, text_size=30, outline=CRIMSON, text="Return")    
+    return_button = Button(color=BLACK, x=30, y=70, width=200, height=50, text_color=WHITE, text_size=30, outline=CRIMSON, text="Return")  # creates a return button on the screen
 
     run = True
     while run:
         screen.fill(BROWN)
         mouse_click = False
         BOARD_WIDTH, BOARD_HEIGHT = 900, 900
-        BG = p.transform.scale(p.image.load("Game Code/board.png"), ((int(screen.get_width()*0.5625)), screen.get_height())) # TODO: Change this line
+        BG = p.transform.scale(p.image.load("Game Code/board.png"), ((int(screen.get_width()*0.5625)), screen.get_height()))
+
         screen.blit(BG, (int(screen.get_width()/2 - (BOARD_WIDTH/2)), 0)) # Puts board in the middle
 
         drawText("Play Game", font, BLACK, screen, 20, 20) # Writes text onto the screen 
 
-        return_button.draw(screen)
+        player_count = random.randint(1,2) # randomly determines who starts the game
+        player_turn = player_count
+        
+        drawText(f"Player {player_count} starts the game", font, WHITE, screen, 20, 100) # prints who starts the game onto the screen
+        
+        drawText(f"Current Turn: {player_turn}", font, WHITE, screen, 20, 200)
+        if player_count == 1:
+            player_count = 0 
+        else:
+            player_count = 1
+
+
+        drawText("'E' to move right", font, WHITE, screen, 20, 100) # prints "E to move right" on the screen
+        drawText("'Q' to move left", font, WHITE, screen, 20, 100) # prints "Q to move left" on the screen
+        drawText("'SPACE' to shoot", font, WHITE, screen, 20, 100) # prints "space to shoot" on the screen
+
+        winner = False
+
+        drawText(f"Winner: {winner}", font, WHITE, screen, 500, 500) # prints the winner on the screen
+
+        return_button.draw(screen) # shows return button on screen
 
         events = p.event.get()
         for event in events:
-            if event.type == QUIT:
-                p.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    run = False
+            if event.type == QUIT: # if close button is pressed
+                p.quit() # quits and closes the window
+                sys.exit() # quits and closes the 
+            if event.type == KEYDOWN: # detects if key has been pressed
+                if event.key == K_ESCAPE: # detects if escape key is pressed
+                    run = False 
 
-                mX, mY = p.mouse.get_pos()
+                mX, mY = p.mouse.get_pos() # retrieves current mouse position
                 if event.key == K_e: # Moves striker right
                     
                     if mX > 600:
-                        striker.x = 560
+                        striker.x = 560 # sets striker within boundary
                     else:
                         striker.x += 5
                 if event.key == K_q: # Moves striker left
                     if mX < 500:
-                        striker.x = 600
+                        striker.x = 600 # sets striker within boundary
                     else:
                         striker.x -= 5
 
@@ -181,24 +202,24 @@ def game(screen):
                     print("angle + 10")
 
 
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
+            if event.type == MOUSEBUTTONDOWN: # detects if mouse button is pressed
+                if event.button == 1: 
                     mouse_click = True                    
             
-            if event.type == KEYDOWN:
-                if event.key == K_SPACE:
-                    striker.shot()
+            if event.type == KEYDOWN: # detects if key is pressed
+                if event.key == K_SPACE: # detects if space button is pressed
+                    striker.shot() # shoots the striker. sets the striker state to be shot
 
 
-        if return_button.mouse_collide() and mouse_click == True:
-            run = False        
+        if return_button.mouse_collide() and mouse_click == True: # detects if mouse button is clicked over the return button area
+            run = False # returns user to the main menu
         
-        WIDTH = screen.get_width()
-        HEIGHT = screen.get_height()
+        WIDTH = screen.get_width() # retrieves integer value of the width of window
+        HEIGHT = screen.get_height() # retrivies integer value of the height of the window
 
-        queen_piece.draw()
+        queen_piece.draw() # draws the queen piece
         
-        brown_piece1.draw()
+        brown_piece1.draw() # draws the brown pieces onto the board
         brown_piece2.draw()
         brown_piece3.draw()  
         brown_piece4.draw()  
@@ -208,7 +229,7 @@ def game(screen):
         brown_piece8.draw()    
         brown_piece9.draw()    
         
-        black_piece1.draw()   
+        black_piece1.draw() # draws the black pieces on the board
         black_piece2.draw()
         black_piece3.draw()  
         black_piece4.draw()  
@@ -218,7 +239,7 @@ def game(screen):
         black_piece8.draw()  
         black_piece9.draw()  
         
-        striker.draw()
+        striker.draw() # draws the striker
 
-        p.display.update()
-        clock.tick(FPS)
+        p.display.update()  # updates the display
+        clock.tick(FPS) # updates function every 1/value of FPS constant
